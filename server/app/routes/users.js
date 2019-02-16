@@ -10,6 +10,6 @@ router.route('/')
 				res.send(err)
 			res.json(users);
 		});
-	})
+	});
 
 export default router;

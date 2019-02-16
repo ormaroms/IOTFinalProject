@@ -7,7 +7,7 @@ import routes from './routes';
 
 const app = express(); // new server
 
-mongoose.connect(`mongodb://localhost:${constants.MONGO_PORT}/${constants.DB_NAME}`);
+mongoose.connect(`mongodb://localhost:${constants.MONGO_PORT}/${constants.DB_NAME}`, {useNewUrlParser: true});
 
 // parse body params
 app.use(bodyParser.json());
