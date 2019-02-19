@@ -15,7 +15,24 @@ router.route('/')
 
 router.route('/status')
     .post((req, res) => {
-        let newStatus = new Status({arduinoId: '44444444', time: Date.now(), lightStatus: 1, gasStatus: 0});
+        let isLightOn = false;
+        let isGasOn = false;
+        console.log(req.body);
+        if(req.body.gasStatus === 0) {
+            isGasOn = true;
+        }
+
+        if(req.body.lightStatus === 0) {
+            isLightOn = true;
+        }
+
+        let statusJson = {
+            arduinoId: req.body.arduinoId,
+            time: Date.now(),
+            lightStatus: isLightOn,
+            gasStatus: isGasOn
+        };
+        let newStatus = new Status(statusJson);
         newStatus.save()
             .then(status => {
             res.send("status saved to database");
