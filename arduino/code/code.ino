@@ -7,8 +7,7 @@
 #include <DNSServer.h>
 #include <ESP8266WebServer.h>
 #include <WiFiManager.h>         // https://github.com/tzapu/WiFiManager
-#include <ArduinoHttpClient.h>
-#include <HttpClient.h>
+#include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 
 
@@ -17,9 +16,9 @@ WiFiServer server(80);
 
 char serverAddress[] = "192.168.0.3";  // server address
 int port = 80;
+String hostAddress = "localhost/status";
 
-WiFiClient client; 
-HttpClient httpClient = HttpClient(client, serverAddress, port);
+
 
 // Variable to store the HTTP request
 String header;
@@ -65,6 +64,7 @@ void setup() {
 }
 
 void loop(){
+  HTTPClient http;
   int lightValue;
   int gasValue;
   char output[128];
@@ -72,7 +72,7 @@ void loop(){
   DynamicJsonDocument doc(capacity);
 
   
-  client = server.available();   // Listen for incoming clients
+  WiFiClient client = server.available();   // Listen for incoming clients
 
   // Read GPIO 5 and print it on Serial port
   Serial.print("State of GPIO 5 / inputGas: ");
@@ -92,9 +92,12 @@ void loop(){
 
   serializeJson(doc, output);
   Serial.println(output);
-  
-  String contentType = "application/x-www-form-urlencoded";
-  httpClient.post("/status", contentType, output);
+
+  http.begin(hostAddress);
+  http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+  http.POST(output);
+  http.writeToStream(&Serial);
+  http.end();
 
   if (client) {                             // If a new client connects,
     Serial.println("New Client.");          // print a message out in the serial port
