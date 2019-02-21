@@ -1,4 +1,3 @@
-// import express
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
@@ -7,7 +6,7 @@ import routes from './routes';
 
 const app = express(); // new server
 
-mongoose.connect(`mongodb://localhost:${constants.MONGO_PORT}/${constants.DB_NAME}`, {useNewUrlParser: true});
+mongoose.connect(`mongodb://localhost:${constants.MONGO_PORT}/${constants.DB_NAME}`, {useMongoClient: true});
 
 // parse body params
 app.use(bodyParser.json());

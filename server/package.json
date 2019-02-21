@@ -18,8 +18,9 @@
   },
   "homepage": "https://github.com/ormaroms/IOTFinalProject.git#readme",
   "devDependencies": {
+    "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.22.0",
-    "babel-register": "^6.23.0",
+    "babel-register": "^6.26.0",
     "nodemon": "^1.11.0"
   },
   "dependencies": {
