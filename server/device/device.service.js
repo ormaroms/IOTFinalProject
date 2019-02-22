@@ -16,7 +16,7 @@ async function create(id ,deviceParam) {
 
     await device.save();
 
-    return await Device.find({userId: id})[0].devices;
+    return await Device.find({userId: id}).devices;
 }
 
 async function update(id, deviceParam) {

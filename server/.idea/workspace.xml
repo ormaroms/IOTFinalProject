@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd2c48ac-9cb6-43a1-a12a-83fcafad0bf2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/device/device.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/device/device.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/device/device.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/device/device.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/device/device.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/device/device.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/status/status.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/status/status.model.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,10 +25,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/device/device.service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="29" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
+            <state relative-caret-position="204">
+              <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
               <folding>
-                <marker date="1550868320078" expanded="true" signature="239:242" ph="..." />
+                <marker date="1550868434151" expanded="true" signature="239:242" ph="..." />
               </folding>
             </state>
           </provider>
@@ -181,7 +179,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550868314479" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550868347729" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -236,12 +234,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1550849896514</updated>
-      <workItem from="1550849899806" duration="13603000" />
+      <workItem from="1550849899806" duration="13717000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13603000" />
+    <option name="totallyTimeSpent" value="13717000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -257,11 +255,11 @@
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Version Control" weight="0.32936078" />
-      <window_info anchor="bottom" id="Terminal" weight="0.31303117" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.31303117" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3286119" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -399,10 +397,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/device/device.service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="29" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
+        <state relative-caret-position="204">
+          <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
           <folding>
-            <marker date="1550868320078" expanded="true" signature="239:242" ph="..." />
+            <marker date="1550868434151" expanded="true" signature="239:242" ph="..." />
           </folding>
         </state>
       </provider>
