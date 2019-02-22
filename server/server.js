@@ -14,6 +14,7 @@ app.use(jwt());
 
 app.use('/users', require('./users/users.controller'));
 app.use('/status', require('./status/status.controller'));
+app.use('/devices', require('./device/device.controller'));
 
 app.use(errorHandler);
 
