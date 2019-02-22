@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const schema = new Schema({
     userId: { type: String, unique: true, required: true },
     devices: [{id:String, name:String}]
-},{ _id : false });
+});
 
 schema.set('toJSON', { virtuals: true });
 

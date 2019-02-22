@@ -4,7 +4,7 @@ const deviceService = require('./device.service');
 
 router.get('/:id', getById);
 router.put('/:id', update);
-router.put('/:id', create);
+router.post('/:id', create);
 router.delete('/:id', _delete);
 
 function getById(req, res, next) {

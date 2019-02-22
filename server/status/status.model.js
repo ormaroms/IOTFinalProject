@@ -6,7 +6,7 @@ const schema = new Schema({
     gasStatus: { type: Boolean, required: true },
     lightStatus: { type: Boolean, default: Date.now },
     time: { type: Date, default: Date.now }
-},{ _id : false });
+});
 
 schema.set('toJSON', { virtuals: true });
 

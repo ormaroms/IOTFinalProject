@@ -1,20 +1,22 @@
 const db = require('_helpers/db');
-const Device = db.Devices;
+const Device = db.Device;
 
 async function getById(id) {
-    return await Device.find({ userId: id });
+    return await Device.findOne({ userId: id }).then(result => {
+        return result.devices;
+    })
 }
 
-async function create(deviceParam) {
-    if (await Device.findOne({ userId: deviceParam.userId })) {
-        throw 'user with the Id "' + deviceParam.userId + '" is already taken';
+async function create(id ,deviceParam) {
+    if (await Device.findOne({ userId: id })) {
+        throw 'User Id with the Id "' + id + '" is already taken';
     }
 
     const device = new Device(deviceParam);
 
     await device.save();
 
-    return device.devices;
+    return await Device.find({userId: id})[0].devices;
 }
 
 async function update(id, deviceParam) {
@@ -25,8 +27,7 @@ async function update(id, deviceParam) {
     Object.assign(device, deviceParam);
 
     await device.save();
-
-    return device.devices;
+    return await Device.find({userId: id}).select('-_id');
 }
 
 async function _delete(id) {
