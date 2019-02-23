@@ -1,7 +1,7 @@
 {
 	"_type": "export",
 	"__export_format": 3,
-	"__export_date": "2019-02-23T12:06:07.234Z",
+	"__export_date": "2019-02-23T12:23:47.310Z",
 	"__export_source": "insomnia.desktop.app:v6.3.2",
 	"resources": [
 		{
@@ -40,8 +40,8 @@
 			"description": "",
 			"environment": {},
 			"metaSortKey": -1550852583441,
-			"modified": 1550852583441,
-			"name": "IOTSERVER",
+			"modified": 1550924421169,
+			"name": "Users",
 			"parentId": "wrk_10611fc3e2134fef9812ef1c59009660",
 			"_type": "request_group"
 		},
@@ -57,11 +57,22 @@
 			"_type": "request_group"
 		},
 		{
+			"_id": "fld_92dcdf0050ae4564b7f39e6eda7aa6b3",
+			"created": 1550924562009,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1550924562009,
+			"modified": 1550924562009,
+			"name": "Status",
+			"parentId": "wrk_10611fc3e2134fef9812ef1c59009660",
+			"_type": "request_group"
+		},
+		{
 			"_id": "req_b7b529df014248da98e4dc49127f6feb",
 			"authentication": {},
 			"body": {
 				"mimeType": "application/json",
-				"text": "{\n\t\"username\": \"omera\",\n\t\"password\": \"jrtcubv\"\n}"
+				"text": "{\n\t\"username\": \"annabanana\",\n\t\"password\": \"asd\"\n}"
 			},
 			"created": 1550852590643,
 			"description": "",
@@ -92,8 +103,8 @@
 			"isPrivate": false,
 			"metaSortKey": -1550852590643,
 			"method": "POST",
-			"modified": 1550853253075,
-			"name": "POSTUser",
+			"modified": 1550924440354,
+			"name": "RegisterAUser",
 			"parameters": [],
 			"parentId": "fld_c7371da8dac642e79c3955125e2e2ecb",
 			"settingDisableRenderRequestBody": false,
@@ -102,7 +113,7 @@
 			"settingRebuildPath": true,
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
-			"url": "http://localhost:4000/users/authenticate",
+			"url": "http://localhost:4000/users/register",
 			"_type": "request"
 		},
 		{
@@ -238,6 +249,38 @@
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
 			"url": "http://localhost:4000/users/5c7021dbd069ea2be493cbf5",
+			"_type": "request"
+		},
+		{
+			"_id": "req_bb426373fd304f93b26894459fd26edc",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"username\": \"annabanana\",\n\t\"password\": \"asd\"\n}"
+			},
+			"created": 1550924476073,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_36c87af3fa7846eb98a0bcf92b6d3fe2",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1550924476073,
+			"method": "POST",
+			"modified": 1550924510914,
+			"name": "AuthAUser",
+			"parameters": [],
+			"parentId": "fld_c7371da8dac642e79c3955125e2e2ecb",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:4000/users/authenticate",
 			"_type": "request"
 		},
 		{
