@@ -1,13 +1,16 @@
 import React, { Component, Fragment } from 'react';
-import {Button, Paper, FormGroup, AppBar, Grid, FormControlLabel, Typography, Switch, FormLabel, FormHelperText, FormControl } from '@material-ui/core';
+import {Paper,Switch, Radio,FormControl,FormLabel,FormControlLabel,FormGroup,Checkbox, Typography,FormHelperText } from '@material-ui/core';
 import styles from './CurrentStatus.css'
 import { withStyles } from '@material-ui/core/styles';
 
+// This is the current status component
+// Will get the isLit isGasLiking arduinoID from the props! ( in the future, after the POC) *propTypes
 
-class CurrentStatue extends Component {
+class CurrentStatus extends Component {
     state = {
-        isGasLit: true,
-        isGasLiking: false,
+        isGasLit: false,
+        isGasLiking: true,
+        arduinoID: "GuyArduino",
     };
 
 
@@ -17,52 +20,59 @@ class CurrentStatue extends Component {
     
     render() {
         const { classes } = this.props;
-        const {isGasLit, isGasLiking} = this.state;
+        const {isGasLit, isGasLiking, arduinoID} = this.state;
         
         return (
             
             <Fragment>
                 <Paper className={classes.root} elevation={1}>                     
-                    <Typography variant="h5" component="h3" className={classes.title}>
+                    <Typography variant="h4" component="h3" className={classes.title}>
                         Current Status
                     </Typography>
                     <Typography className={classes.date} component="h6">
                         Friday, 7 December, 12:37:43
                     </Typography>
-                    
+
                     <p className={classes.arduinoID}>
-                        Arduino Id : BlaBlaBla
+                        Arduino Id : {arduinoID}
                     </p>
+
+
+                    <FormControl component="fieldset">
+                        <FormLabel component="legend">Indicators</FormLabel>
+                        <FormGroup>
+   
+                            
+                            <FormControlLabel
+                                control={
+                                    <Switch
+                                        checked={isGasLiking}
+
+                                        value="Liking"
+                                    />
+                                }
+                                label="Gas liking "
+                                labelPlacement="start"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Switch
+                                        checked={isGasLit}
+
+                                        value="lit"
+                                    />
+                                }
+                                label="Gas lit "
+                                labelPlacement="start"
+                            />
+           
+                            
+                        </FormGroup>
+                        
+                    </FormControl>
                     
-                    <div className={classes.inidcatorSection}>
-                        <div className={classes.rowForIndicators}>
-                            <Typography>
-                                is gas liking: 
-                            </Typography>
-                            {isGasLiking ?
-                                <Typography>
-                                    Yes
-                                </Typography>:
-                                <Typography>
-                                    No
-                                </Typography>
-                            }
-                        </div>
-    
-                        <div className={classes.rowForIndicators}>
-                            <Typography>
-                                is gas lit:
-                            </Typography>
-                            {isGasLit ?
-                                <Typography>
-                                    Yes
-                                </Typography>:
-                                <Typography>
-                                    No
-                                </Typography>
-                            }
-                        </div>
-                    </div>
+                    
+                    
                 </Paper>
             </Fragment>
 
@@ -71,4 +81,4 @@ class CurrentStatue extends Component {
     }
 }
 
-export default  withStyles(styles)(CurrentStatue);
+export default  withStyles(styles)(CurrentStatus);
