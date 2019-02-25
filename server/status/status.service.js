@@ -6,35 +6,29 @@ async function getAll() {
     return await Status.find({},{ __v: 0});
 }
 
-async function getById(id) {
-    let jsonArray = [];
-    return devices.getById(id).then(usersDevices => {
-        console.log(usersDevices.devices);
-        console.log("SDFSDFSDSASDFSDFSDFSDFSDFSDF");
-        usersDevices.devices.forEach((device) => {
-            console.log(device);
-            console.log("Second LOGS");
-            Status.find({arduinoId: device.id}).then((statusOfArdunio) => {
-                if(statusOfArdunio[0]) {
-                console.log(statusOfArdunio[0]);
-                console.log("333333333333333 LOGS !");
+async function getArduinoStatusById(device) {
+    return await Status.find({arduinoId: device.id});
+}
 
-                    let tempJSON = {
-                        "id": device.id,
-                        "name": device.name,
-                        "gasStatus": statusOfArdunio[0].gasStatus,
-                        "lightStatus": statusOfArdunio[0].lightStatus
-                    };
-                    console.log(tempJSON);
-                    jsonArray = [...jsonArray, tempJSON];
-                }
-            })
-        });
-        return {"devices": jsonArray};
-    });
-    console.log("FINISH");
-    console.log(jsonArray);
-    //return await {"devices": jsonArray};
+
+async function getById(id) {
+    let userDevices = await devices.getById(id);
+    let jsonArray = [];
+
+    for (let device of userDevices.devices) {
+        let arduinoStatus = await getArduinoStatusById(device);
+
+        if(arduinoStatus[0]) {
+            jsonArray.push({
+                "id": device.id,
+                "name": device.name,
+                "gasStatus": (arduinoStatus[0]).gasStatus,
+                "lightStatus": (arduinoStatus[0]).lightStatus
+            });
+        }
+    }
+
+    return await jsonArray;
 }
 
 async function update(id, statusParam) {
