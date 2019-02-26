@@ -7,11 +7,24 @@ async function getAll() {
 }
 
 async function getArduinoStatusById(device) {
-    return await Status.find({arduinoId: device.id});
+    return await Status.find({arduinoId: device});
+}
+
+// Dumbed down for the POC
+async function getById(id) {
+    let arduinoStatus = await getArduinoStatusById(id);
+
+    if(arduinoStatus[0]) {
+        return await {
+            "arduinoID": id,
+            "gasStatus": (arduinoStatus[0]).gasStatus,
+            "lightStatus": (arduinoStatus[0]).lightStatus
+        }
+    }
 }
 
 
-async function getById(id) {
+/*async function getById(id) {
     let userDevices = await devices.getById(id);
     let jsonArray = [];
 
@@ -29,9 +42,13 @@ async function getById(id) {
     }
 
     return await jsonArray;
-}
+}*/
 
 async function update(id, statusParam) {
+    // If it is a request from the arduino
+    if (Object.keys(statusParam).length == 1)
+        statusParam = (JSON.parse(Object.keys(statusParam)[0]))
+
     if (await Status.findOne({ arduinoId: id })) {
         await Status.remove({ arduinoId: id});
 
@@ -51,11 +68,11 @@ async function create(id, statusParam) {
     let isLightOn = false;
     let isGasOn = false;
 
-    if(statusParam.gasStatus === 0) {
+    if(statusParam.gasStatus.toString() === "0") {
         isGasOn = true;
     }
 
-    if(statusParam.lightStatus === 0) {
+    if(statusParam.lightStatus.toString() === "0") {
         isLightOn = true;
     }
 
