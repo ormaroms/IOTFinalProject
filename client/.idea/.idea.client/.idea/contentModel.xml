@@ -3,7 +3,22 @@
   <component name="ContentModelStore">
     <e p="/2f21e915" t="IncludeRecursive" />
     <e p="/app" t="IncludeRecursive" />
-    <e p="$PROJECT_DIR$" t="IncludeFlat" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="node_modules/@material-ui/core" t="IncludeRecursive" />
+      <e p="node_modules/@types" t="IncludeRecursive">
+        <e p="node" t="IncludeRecursive" />
+        <e p="prop-types" t="IncludeRecursive" />
+        <e p="react" t="IncludeRecursive" />
+        <e p="unist" t="IncludeRecursive" />
+        <e p="vfile-message" t="IncludeRecursive" />
+      </e>
+      <e p="node_modules/csstype" t="IncludeRecursive" />
+      <e p="node_modules/indefinite-observable" t="IncludeRecursive" />
+      <e p="node_modules/material-ui" t="IncludeRecursive" />
+      <e p="node_modules/react" t="IncludeRecursive" />
+      <e p="node_modules/react-dom" t="IncludeRecursive" />
+      <e p="node_modules/react-scripts" t="IncludeRecursive" />
+    </e>
     <e p="$USER_HOME$/Library/Caches/Rider2018.2/extResources" t="IncludeRecursive" />
     <e p="$USER_HOME$/Library/Caches/Rider2018.2/resharper-host/local/Transient/ReSharperHost/v182/SolutionCaches/_client.-394710494.00" t="ExcludeRecursive" />
   </component>
