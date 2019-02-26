@@ -1,4 +1,5 @@
 
+
 const defaultState = {
     lightStatus: false,
     gasStatus: false,
