@@ -4,23 +4,15 @@ import styles from './CurrentStatus.css'
 import { withStyles } from '@material-ui/core/styles';
 
 // This is the current status component
-// Will get the isLit isGasLiking arduinoID from the props! ( in the future, after the POC) *propTypes
+// Will get the isLit isGasLeaking arduinoID from the props! ( in the future, after the POC) *propTypes
 
 class CurrentStatus extends Component {
-    state = {
-        isGasLit: false,
-        isGasLiking: true,
-        arduinoID: "GuyArduino",
-    };
+    componentDidMount() {
+        this.props.getStatus()
+    }
 
-
-    handleChange = name => event => {
-        this.setState({ [name]: event.target.checked });
-    };
-    
     render() {
-        const { classes } = this.props;
-        const {isGasLit, isGasLiking, arduinoID} = this.state;
+        const {isGasLit, isGasLeaking, arduinoID, classes} = this.props;
         
         return (
             
@@ -46,12 +38,12 @@ class CurrentStatus extends Component {
                             <FormControlLabel
                                 control={
                                     <Switch
-                                        checked={isGasLiking}
+                                        checked={isGasLeaking}
 
-                                        value="Liking"
+                                        value="Leaking"
                                     />
                                 }
-                                label="Gas liking "
+                                label="Gas Leaking "
                                 labelPlacement="start"
                             />
                             <FormControlLabel
@@ -59,10 +51,10 @@ class CurrentStatus extends Component {
                                     <Switch
                                         checked={isGasLit}
 
-                                        value="lit"
+                                        value="Lit"
                                     />
                                 }
-                                label="Gas lit "
+                                label="Gas Lit "
                                 labelPlacement="start"
                             />
            
