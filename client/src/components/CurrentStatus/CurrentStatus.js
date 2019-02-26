@@ -8,11 +8,11 @@ import { withStyles } from '@material-ui/core/styles';
 
 class CurrentStatus extends Component {
     componentDidMount() {
-        this.props.getStatus()
+        this.props.getStatus(this.props.arduinoID)
     }
 
     render() {
-        const {isGasLit, isGasLeaking, arduinoID, classes} = this.props;
+        const {lightStatus, gasStatus, arduinoID, classes} = this.props;
         
         return (
             
@@ -38,7 +38,7 @@ class CurrentStatus extends Component {
                             <FormControlLabel
                                 control={
                                     <Switch
-                                        checked={isGasLeaking}
+                                        checked={gasStatus}
 
                                         value="Leaking"
                                     />
@@ -49,7 +49,7 @@ class CurrentStatus extends Component {
                             <FormControlLabel
                                 control={
                                     <Switch
-                                        checked={isGasLit}
+                                        checked={lightStatus}
 
                                         value="Lit"
                                     />

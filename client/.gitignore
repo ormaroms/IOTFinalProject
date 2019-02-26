@@ -35,4 +35,9 @@ typings
 .npm
 
 # Optional REPL history
+
+#idea
+.idea
+
 .node_repl_history
+
