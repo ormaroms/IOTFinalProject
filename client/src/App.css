@@ -32,3 +32,15 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("Montserrat-Regular.ttf") format("truetype");
+  /*src: url('Montserrat-Regular.otf'); !* IE9 Compat Modes *!\*/
+  /*url('Montserrat-Regular.otf') format('woff2'), !* Super Modern Browsers *!*/
+  /*url('Montserrat-Regular.otf')  format('truetype'), !* Safari, Android, iOS *!*/
+}
+
+html, Typography, h4, h3, h6 {
+    font-family: "Montserrat";
+}
