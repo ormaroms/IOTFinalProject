@@ -7,8 +7,27 @@ import { withStyles } from '@material-ui/core/styles';
 // Will get the isLit isGasLeaking arduinoID from the props! ( in the future, after the POC) *propTypes
 
 class CurrentStatus extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {currentTime: ''};
+    }
+
+
     componentDidMount() {
-        this.props.getStatus(this.props.arduinoID)
+        this.props.getStatus(this.props.arduinoID);
+debugger;
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var months = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"];
+        setInterval( () => {
+            debugger;
+            var date = new Date();
+            this.setState({
+                currentTime : days[date.getDay()] + ", " + date.getDate() + ' ' + months[date.getMonth()] +
+                    ' ' + date.getFullYear() + ', ' + date.toLocaleTimeString()
+            })
+        },1000)
     }
 
     render() {
@@ -22,7 +41,7 @@ class CurrentStatus extends Component {
                         Current Status
                     </Typography>
                     <Typography className={classes.date} component="h6">
-                        Friday, 7 December, 12:37:43
+                        { this.state.currentTime }
                     </Typography>
 
                     <p className={classes.arduinoID}>
