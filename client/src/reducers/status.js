@@ -3,7 +3,7 @@
 const defaultState = {
     lightStatus: false,
     gasStatus: false,
-    arduinoID: "1",
+    arduinoID: "Kitchen arduino",
 }
 
 export default function reduce(state = defaultState, action) {
