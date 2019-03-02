@@ -9,8 +9,7 @@ const styles = theme => ({
         paddingLeft: '0px !important'
     },
     rowForIndicators:{
-        display:"-webkit-box",
-        fontFamily: "Montserrat"
+        display:"-webkit-box"
     },
     header: {
       paddingTop: '10px',
@@ -19,14 +18,12 @@ const styles = theme => ({
     },
     title:{
         fontSize: "35px",
-        fontFamily: "Montserrat",
         fontWeight: "bold",
         color: "whitesmoke"
     },
     date:{
         fontSize:"18px",
         marginBottom: "20px",
-        fontFamily: "Montserrat",
         color: "whitesmoke"
     },
     arduinoID:{
@@ -34,11 +31,10 @@ const styles = theme => ({
         color:"#a28b8b",
         textAlign:"left",
         marginLeft: "30px",
-        fontFamily: "Montserrat",
+        fontFamily: "Montserrat"
     },
     inidcatorSection:{
-        marginTop: "20px",
-        fontFamily: "Montserrat"
+        marginTop: "20px"
     },
         formControl: {
             margin: theme.spacing.unit * 3,
