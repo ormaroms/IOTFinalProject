@@ -23,7 +23,11 @@ function getById(req, res, next) {
 function update(req, res, next) {
     statusService.update(req.params.id, req.body)
         .then(() => res.json({}))
-        .catch(err => next(err));
+        .catch(err => {
+            console.error(err)
+            next(err)
+        })
+
 }
 
 function create(req, res, next) {

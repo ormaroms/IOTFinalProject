@@ -58,7 +58,7 @@ async function update(id, statusParam) {
 }
 
 async function create(id, statusParam) {
-    console.log("New status received, id: " +id )
+    console.log("New status received, id: " +id );
 
     if (await Status.findOne({ arduinoId: id })) {
         await Status.remove({ arduinoId: id});
@@ -85,7 +85,13 @@ async function create(id, statusParam) {
 
     let newStatus = new Status(statusJson);
 
-    await newStatus.save();
+    try{
+        let a = await newStatus.save();
+        console.log(a)
+    } catch (e) {
+        console.log(e);
+    }
+
 }
 
 async function _delete(id) {
