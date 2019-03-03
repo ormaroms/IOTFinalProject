@@ -10,7 +10,8 @@ function jwt() {
         path: [
             '/users/authenticate',
             '/users/register',
-            /status/
+            '/status/:id',
+            '/status/'
         ]
     });
 }

@@ -58,8 +58,6 @@ async function update(id, statusParam) {
 }
 
 async function create(id, statusParam) {
-    console.log("New status received, id: " +id )
-
     if (await Status.findOne({ arduinoId: id })) {
         await Status.remove({ arduinoId: id});
 
