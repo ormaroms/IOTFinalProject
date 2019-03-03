@@ -14,9 +14,11 @@
 // Set web server port number to 80
 WiFiServer server(80);
 
+const int id = 1;
+
 char serverAddress[] = "192.168.0.3";  // server address
 int port = 80;
-String hostAddress = "localhost/status";
+String hostAddress = "http://192.168.43.204:4000/status/1";
 
 
 
@@ -30,7 +32,7 @@ String output4State = "off";
 // Assign input variables to GPIO pins
 const int inputGas = 5;
 const int inputLight = 4;
-const int id = 1;
+
 
 void setup() {
   Serial.begin(115200);
@@ -84,7 +86,7 @@ void loop(){
   lightValue = digitalRead(inputLight);
   Serial.println(lightValue);
 
-  Serial.println("making POST request");
+  Serial.println("making PUT request");
 
   doc["id"] = id;
   doc["lightStatus"] = lightValue;
@@ -95,7 +97,7 @@ void loop(){
 
   http.begin(hostAddress);
   http.addHeader("Content-Type", "application/x-www-form-urlencoded");
-  http.POST(output);
+  http.PUT(output);
   http.writeToStream(&Serial);
   http.end();
 
