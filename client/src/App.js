@@ -5,6 +5,7 @@ import {createStore} from 'redux'
 import reducers from './reducers/'
 import './App.css';
 import StatusContainer from "./containers/StatusContainer";
+import LogIn from "./components/LogIn/LogIn"
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const store = createStore(reducers)
@@ -22,7 +23,7 @@ class App extends Component {
             <Provider store={store}>
                 <div className="App">
                     <header className="App-header">
-                        <StatusContainer/>
+                        <LogIn/>
                     </header>
                 </div>
             </Provider>

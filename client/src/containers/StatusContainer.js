@@ -6,6 +6,7 @@ import {getStatus} from '../serverapi/'
 
 const mapStateToProps = state => {
     return {
+        
         ...state.status
     }
 }
