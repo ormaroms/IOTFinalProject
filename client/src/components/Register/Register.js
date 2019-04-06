@@ -1,14 +1,13 @@
 import React, { Component, Fragment } from 'react';
-import styles from './Login.css'
+import styles from './Register.css'
 import { withStyles } from '@material-ui/core/styles';
 import {Button, TextField, FormControl, FormLabel, Paper, Typography} from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
-import { withRouter } from 'react-router-dom';
 
 // This is the current status component
 // Will get the isLit isGasLeaking arduinoID from the props! ( in the future, after the POC) *propTypes
 
-class Login extends Component {
+class Register extends Component {
 
 
 
@@ -17,22 +16,13 @@ class Login extends Component {
     }
 
     constructor(props) {
-        debugger;
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.routeToRegister = this.routeToRegister.bind(this);
     }
 
     handleSubmit(e){
-        e.preventDefault();
-debugger;
-        this.props.Login(this.userName.value, this.password.value);
-    }
-
-    routeToRegister() {
-        debugger;
-        let path = "./Register/Register";
-        this.props.history.push(path);
+       // TODO: add validation
+        // send the user to serever
     }
 
     render() {
@@ -45,7 +35,7 @@ debugger;
                     <AppBar className={classes.header} position="static" color="default">
 
                         <Typography className={classes.title}>
-                            Log In
+                            Register
                         </Typography>
                     </AppBar>
 
@@ -56,8 +46,19 @@ debugger;
                     <div className="Login">
                         <form onSubmit={this.handleSubmit}>
                             <TextField
+                                id="name"
+                                variant="outlined"
+                                label="Name"
+                                inputRef={el => this.name = el}
+                            />
+                            <TextField
+                                id="email"
+                                variant="outlined"
+                                label="Email"
+                                inputRef={el => this.email = el}
+                            />
+                            <TextField
                                 id="userName"
-                                //className={classNames(classes.margin, classes.textField)}
                                 variant="outlined"
                                 label="User Name"
                                 inputRef={el => this.userName = el}
@@ -70,12 +71,9 @@ debugger;
                             </TextField>
 
                             <Button type="submit" variant="contained" color="primary" className={classes.button}>
-                                Log In
+                                Create account
                             </Button>
                         </form>
-
-                        <p className={classes.text}>
-                            Dont have an account yet? Sign in </p>
                     </div>
                 </Paper>
             </Fragment>
@@ -83,4 +81,4 @@ debugger;
     }
 }
 
-export default withStyles(styles)(Login);
+export default withStyles(styles)(Register);

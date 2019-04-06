@@ -12,6 +12,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
+
     return {
         getStatus: id => {
             getStatus(id).then(res => {

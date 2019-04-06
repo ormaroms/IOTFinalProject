@@ -8,4 +8,9 @@ export function getStatus(id) {
 export function logIn(userName, password)
 {
     debugger;
+    return axios.post(SERVER + '/users/authenticate', {
+        "username": userName,
+        "password": password
+    })
+
 }
