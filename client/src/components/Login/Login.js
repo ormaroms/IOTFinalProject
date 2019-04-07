@@ -3,14 +3,13 @@ import styles from './Login.css'
 import { withStyles } from '@material-ui/core/styles';
 import {Button, TextField, FormControl, FormLabel, Paper, Typography} from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
-import { withRouter } from 'react-router-dom';
+import history from '../../history'
+
 
 // This is the current status component
 // Will get the isLit isGasLeaking arduinoID from the props! ( in the future, after the POC) *propTypes
 
 class Login extends Component {
-
-
 
     componentDidMount() {
 
@@ -20,19 +19,15 @@ class Login extends Component {
         debugger;
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.routeToRegister = this.routeToRegister.bind(this);
     }
 
     handleSubmit(e){
         e.preventDefault();
-debugger;
         this.props.Login(this.userName.value, this.password.value);
     }
 
     routeToRegister() {
-        debugger;
-        let path = "./Register/Register";
-        this.props.history.push(path);
+        history.push('register')
     }
 
     render() {
@@ -75,7 +70,8 @@ debugger;
                         </form>
 
                         <p className={classes.text}>
-                            Dont have an account yet? Sign in </p>
+                            Dont have an account yet? <a href onClick={this.routeToRegister}> Sign up </a>
+                        </p>
                     </div>
                 </Paper>
             </Fragment>
