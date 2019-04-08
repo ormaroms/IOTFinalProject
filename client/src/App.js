@@ -25,7 +25,8 @@ class App extends Component {
                 <div className="App">
                     <header className="App-header">
                         <Login/>
-               {/*<Register/>*/}
+               {/*<Registels
+               r/>*/}
                     </header>
                 </div>
             </Provider>
