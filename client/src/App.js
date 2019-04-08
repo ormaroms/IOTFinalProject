@@ -5,9 +5,11 @@ import {createStore} from 'redux'
 import reducers from './reducers/'
 import './App.css';
 import StatusContainer from "./containers/StatusContainer";
-import Login from "./components/Login/Login"
-import Register from "./components/Register/Register"
+import RegisterContainer from "./containers/RegisterContainer"
+import LoginContainer from "./containers/LoginContainer"
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { Router, Route } from 'react-router-dom';
+import history from './history'
 
 const store = createStore(reducers)
 
@@ -24,9 +26,10 @@ class App extends Component {
             <Provider store={store}>
                 <div className="App">
                     <header className="App-header">
-                        <Login/>
-               {/*<Registels
-               r/>*/}
+                        <Router history={history}>
+                            <Route path="/" exact component={LoginContainer} />
+                            <Route path="/register" component={RegisterContainer} />
+                        </Router>
                     </header>
                 </div>
             </Provider>
