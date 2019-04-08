@@ -8,10 +8,9 @@ function jwt() {
     const secret = config.secret;
     return expressJwt({ secret, isRevoked }).unless({
         path: [
+            { url: /^\/status\/.*/, methods: ['GET', 'PUT', 'POST', 'DELETE'] },
             '/users/authenticate',
-            '/users/register',
-            '/status/:id',
-            '/status/'
+            '/users/register'
         ]
     });
 }
