@@ -1,11 +1,10 @@
 {
-    "name": "node-mongo-registration-login-api",
+    "name": "IOTFinalProject",
     "version": "1.0.0",
-    "description": "NodeJS + MongoDB API for User Management, Authentication and Registration",
-    "license": "MIT",
+    "description": "NodeJS Server for IOT collman project",
     "repository": {
         "type": "git",
-        "url": "https://github.com/cornflourblue/node-mongo-registration-login-api.git"
+        "url": "https://github.com/ormaroms/IOTFinalProject.git"
     },
     "scripts": {
         "start": "node ./server.js",
