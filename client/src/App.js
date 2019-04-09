@@ -12,7 +12,11 @@ import { Router, Route } from 'react-router-dom';
 import history from './history'
 import ArduionsList from "./components/ArduinosList/ArduionsList"
 
+
 const store = createStore(reducers)
+store.subscribe(() => {
+    localStorage.setItem('TOKEN', store.getState().token)
+})
 
 const theme = createMuiTheme({
     typography: {
@@ -30,6 +34,7 @@ class App extends Component {
                         <Router history={history}>
                             <Route path="/" exact component={LoginContainer} />
                             <Route path="/register" component={RegisterContainer} />
+                            <Route path="/status" component={StatusContainer} />
                         </Router>
                     </header>
                 </div>

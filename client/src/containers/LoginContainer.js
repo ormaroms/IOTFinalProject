@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import Login from '../components/Login/Login'
 import {LoginSuccceeded, LoginFailed} from '../actions/login'
 import {login} from '../serverapi/'
+import history from '../history'
 
 
 const mapStateToProps = state => {
@@ -13,12 +14,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        Login: (userName, password) => {
+        login: (userName, password) => {
             debugger;
             login(userName, password).then(res => {
-                debugger;
                 console.log("User login succeeded")
                 dispatch(LoginSuccceeded(res.data))
+                history.push('/status')
             }).catch(err => {
                 debugger;
                 console.error("User login failed")

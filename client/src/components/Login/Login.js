@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import {Button, TextField, FormControl, FormLabel, Paper, Typography} from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import history from '../../history'
+import {login} from "../../serverapi";
 
 
 // This is the current status component
@@ -23,10 +24,7 @@ class Login extends Component {
 
     handleSubmit(e){
         e.preventDefault();
-        this.props.Login(this.userName.value, this.password.value).then((res) => {
-debugger;
-                console.log('Fetched user and updated UI!')
-        });
+        this.props.login(this.userName.value, this.password.value)
     }
 
     routeToRegister() {
