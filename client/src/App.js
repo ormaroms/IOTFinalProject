@@ -10,6 +10,7 @@ import LoginContainer from "./containers/LoginContainer"
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { Router, Route } from 'react-router-dom';
 import history from './history'
+import ArduionsList from "./components/ArduinosList/ArduionsList"
 
 const store = createStore(reducers)
 

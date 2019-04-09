@@ -23,7 +23,10 @@ class Login extends Component {
 
     handleSubmit(e){
         e.preventDefault();
-        this.props.Login(this.userName.value, this.password.value);
+        this.props.Login(this.userName.value, this.password.value).then((res) => {
+debugger;
+                console.log('Fetched user and updated UI!')
+        });
     }
 
     routeToRegister() {
@@ -70,7 +73,7 @@ class Login extends Component {
                         </form>
 
                         <p className={classes.text}>
-                            Dont have an account yet? <a href onClick={this.routeToRegister}> Sign up </a>
+                            Dont have an account yet? <a href className={classes.signUp} onClick={this.routeToRegister}> Sign up </a>
                         </p>
                     </div>
                 </Paper>

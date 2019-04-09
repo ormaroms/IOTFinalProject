@@ -22,7 +22,9 @@ class Register extends Component {
 
     handleSubmit(e){
        // TODO: add validation
-        // send the user to serever
+        e.preventDefault();
+        this.props.register(this.userName.value, this.password.value);
+        debugger;
     }
 
     render() {

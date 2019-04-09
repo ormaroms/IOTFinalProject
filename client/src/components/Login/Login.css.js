@@ -22,6 +22,10 @@ const styles = theme => ({
         fontSize:"16px",
         color:"black",
         // fontFamily: "Montserrat"
+    },
+    signUp: {
+        textDecoration: "underline",
+        cursor: "pointer"
     }
 });
 export default styles;
