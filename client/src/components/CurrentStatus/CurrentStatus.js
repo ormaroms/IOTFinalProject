@@ -31,6 +31,10 @@ class CurrentStatus extends Component {
                     ' ' + date.getFullYear() + ', ' + date.toLocaleTimeString()
             })
         },1000)
+
+        setInterval(() => {
+            this.props.getStatus(this.props.token, this.props.arduinoID)
+        }, 10000)
     }
 
     render() {

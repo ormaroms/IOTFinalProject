@@ -3,7 +3,7 @@ import axios from 'axios'
 const SERVER = 'https://iot-gas-monitor.herokuapp.com'
 
 export function getStatus(token, id) {
-    return axios.get(SERVER + '/status/' + id, {params: {token, id}})
+    return axios.get(SERVER + '/status/' + id)//, {params: {token, id}})
 }
 
 export function login(userName, password)
