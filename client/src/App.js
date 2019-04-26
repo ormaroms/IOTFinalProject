@@ -7,10 +7,10 @@ import './App.css';
 import StatusContainer from "./containers/StatusContainer";
 import RegisterContainer from "./containers/RegisterContainer"
 import LoginContainer from "./containers/LoginContainer"
+import ArduionsListContainer from "./containers/ArduionsListContainer"
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { Router, Route } from 'react-router-dom';
 import history from './history'
-import ArduionsList from "./components/ArduinosList/ArduionsList"
 
 
 const store = createStore(reducers)
@@ -35,6 +35,7 @@ class App extends Component {
                             <Route path="/" exact component={LoginContainer} />
                             <Route path="/register" component={RegisterContainer} />
                             <Route path="/status" component={StatusContainer} />
+                            <Route path="/arduionsList" component={ArduionsListContainer} />
                         </Router>
                     </header>
                 </div>

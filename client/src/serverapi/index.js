@@ -6,6 +6,15 @@ export function getStatus(token, id) {
     return axios.get(SERVER + '/status/' + id)//, {params: {token, id}})
 }
 
+export function getUserDevices(token, id) { // The id need to be here
+    return axios.get(SERVER + '/devices/' + '5caba627e4b63200044dc316', {
+        headers: {
+            'authorization' : 'Bearer '+token,
+            'Content-Type' : 'application/json'
+        }
+    })
+}
+
 export function login(userName, password)
 {
     debugger;
