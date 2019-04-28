@@ -18,7 +18,7 @@ const int id = 1;
 
 char serverAddress[] = "192.168.0.3";  // server address
 int port = 80;
-String hostAddress = "http://192.168.43.204:4000/status/1";
+String hostAddress = "http://iot-gas-monitor.herokuapp.com/status/1";
 
 
 
@@ -69,6 +69,7 @@ void loop(){
   HTTPClient http;
   int lightValue;
   int gasValue;
+  int httpCode;
   char output[128];
   const size_t capacity = JSON_OBJECT_SIZE(3);
   DynamicJsonDocument doc(capacity);
@@ -97,10 +98,15 @@ void loop(){
 
   http.begin(hostAddress);
   http.addHeader("Content-Type", "application/x-www-form-urlencoded");
-  http.PUT(output);
+  httpCode = http.PUT(output);
+  String payload = http.getString();                  //Get the response payload
+
+  Serial.println(httpCode);   //Print HTTP return code
+  Serial.println(payload); 
+
   http.writeToStream(&Serial);
   http.end();
-
+  
   if (client) {                             // If a new client connects,
     Serial.println("New Client.");          // print a message out in the serial port
     String currentLine = "";                // make a String to hold incoming data from the client

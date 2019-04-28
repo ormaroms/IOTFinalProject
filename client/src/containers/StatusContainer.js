@@ -6,14 +6,16 @@ import {getStatus} from '../serverapi/'
 
 const mapStateToProps = state => {
     return {
+        token: state.app.token,
         ...state.status
     }
 }
 
 const mapDispatchToProps = dispatch => {
+
     return {
-        getStatus: id => {
-            getStatus(id).then(res => {
+        getStatus: (token, id) => {
+            getStatus(token, id).then(res => {
                 console.log("Status data fetched")
                 dispatch(statusDataFectched(res.data))
             }).catch(err => {

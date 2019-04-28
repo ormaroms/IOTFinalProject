@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Info from '@material-ui/icons/Info';
 import Grid from '@material-ui/core/Grid';
+import history from '../../history'
 
 // This is the current status component
 // Will get the isLit isGasLeaking arduinoID from the props! ( in the future, after the POC) *propTypes
@@ -18,7 +19,7 @@ class CurrentStatus extends Component {
 
 
     componentDidMount() {
-        this.props.getStatus(this.props.arduinoID);
+        this.props.getStatus(this.props.token, this.props.arduinoID);
 
         var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         var months = ["January", "February", "March", "April", "May", "June",
@@ -30,10 +31,19 @@ class CurrentStatus extends Component {
                     ' ' + date.getFullYear() + ', ' + date.toLocaleTimeString()
             })
         },1000)
+
+        setInterval(() => {
+            this.props.getStatus(this.props.token, this.props.arduinoID)
+        }, 10000)
     }
 
     render() {
         const {lightStatus, gasStatus, arduinoID, classes} = this.props;
+
+        if (this.props.token === undefined || this.props.token === null || this.props.token === "") {
+            history.push('/')
+            return (<div></div>)
+        }
         
         return (
             
