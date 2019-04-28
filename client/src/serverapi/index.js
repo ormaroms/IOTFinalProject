@@ -15,9 +15,20 @@ export function getUserDevices(token, id) { // The id need to be here
     })
 }
 
+export function addNewDevice(token, devices) { // TODO: insert token
+    return axios.post(SERVER + '/devices/' + '5caba627e4b63200044dc316', {
+        "userId": "5caba627e4b63200044dc316",
+        "devices": devices
+    }, {
+        headers: {
+            'authorization' : 'Bearer ' + token,
+            'Content-Type': 'application/json'
+        }
+    })
+}
+
 export function login(userName, password)
 {
-    debugger;
     return axios.post(SERVER + '/users/authenticate', {
         "username": userName,
         "password": password

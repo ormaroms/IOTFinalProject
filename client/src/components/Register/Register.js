@@ -41,10 +41,6 @@ class Register extends Component {
                         </Typography>
                     </AppBar>
 
-                    <FormControl>
-
-
-                    </FormControl>
                     <div className="Login">
                         <form onSubmit={this.handleSubmit}>
                             <TextField

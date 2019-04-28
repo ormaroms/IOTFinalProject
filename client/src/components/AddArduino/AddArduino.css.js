@@ -17,19 +17,6 @@ const styles = theme => ({
         fontSize: "35px",
         fontWeight: "bold",
         color: "whitesmoke"
-    },
-    text:{
-        fontSize:"16px",
-        color:"black",
-        // fontFamily: "Montserrat"
-    },
-    signUp: {
-        textDecoration: "underline",
-        cursor: "pointer"
-    },
-    addButton: {
-        color: "black",
-        cursor: "pointer"
     }
 });
 export default styles;
