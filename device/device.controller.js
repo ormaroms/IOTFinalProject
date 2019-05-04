@@ -15,19 +15,19 @@ function getById(req, res, next) {
 
 function update(req, res, next) {
     deviceService.update(req.params.id, req.body)
-        .then(() => res.json({}))
+        .then((devices) => res.json({devices}))
         .catch(err => next(err));
 }
 
 function create(req, res, next) {
     deviceService.create(req.params.id, req.body)
-        .then(() => res.json({}))
+        .then((devices) => res.json({devices}))
         .catch(err => next(err));
 }
 
 function _delete(req, res, next) {
     deviceService.delete(req.params.id, req.body)
-        .then(() => res.json({}))
+        .then((devices) => res.json({devices}))
         .catch(err => next(err));
 }
 

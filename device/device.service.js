@@ -16,7 +16,7 @@ async function create(id ,deviceParam) {
         let userDevices = await Device.findOne({ userId: id});
         let device = userDevices.devices.filter(device => device.id === deviceParam.devices[0].id);
 
-        if (device.length != 0) {
+        if (device.length !== 0) {
             throw new Error('Device Id = ' + device[0].id + ' Already exists!');
         } else {
             await userDevices.devices.push(deviceParam.devices[0]);
@@ -25,18 +25,28 @@ async function create(id ,deviceParam) {
         await userDevices.save();
     }
 
-    return await Device.find({userId: id}, {_id: 0}).then(result => {return {"devices": result.devices}});
+    return await Device.findOne({userId: id}, {_id: 0}).then(result => {return result.devices});
 }
 
 async function update(id, deviceParam) {
-    const device = await Device.find({userId: id});
+    let userDevices = await Device.findOne({ userId: id});
 
-    if (!device) throw 'Device not found';
+    if (userDevices) {
+        let device = userDevices.devices.filter(device => device.id === deviceParam.devices[0].id);
 
-    Object.assign(device, deviceParam);
+        if (device.length === 0) {
+            throw new Error('Device Id = ' + deviceParam.devices[0].id + ' Doesnt exists!');
+        } else {
+            let filtersDevices = userDevices.devices.filter(device => device.id !== deviceParam.devices[0].id);
+            filtersDevices.push(deviceParam.devices[0]);
+            userDevices.devices = filtersDevices;
 
-    await device.save();
-    return await Device.find({userId: id}).select('-_id');
+            await userDevices.save();
+            return await Device.findOne({userId: id}, {_id: 0}).then(result => {return result.devices});
+        }
+    } else {
+        throw new Error('User ' + id + " has no Devices");
+    }
 }
 
 async function _delete(id, deviceContent) {
@@ -44,11 +54,12 @@ async function _delete(id, deviceContent) {
     if (userDevices) {
         let device = userDevices.devices.filter(device => device.id === deviceContent.arduinoId);
 
-        if (device.length != 0) {
+        if (device.length !== 0) {
             let userDevicesData = userDevices.devices.filter(device => device.id !== deviceContent.arduinoId);
             userDevices.devices = userDevicesData;
             await userDevices.save();
-            console.log("worked");
+
+            return await Device.findOne({userId: id}, {_id: 0}).then(result => {return result.devices});
         } else {
             throw new Error('userId ' + id + ' has no devices with an id ' + deviceContent.arduinoId);
         }
