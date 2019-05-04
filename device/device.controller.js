@@ -26,7 +26,7 @@ function create(req, res, next) {
 }
 
 function _delete(req, res, next) {
-    deviceService.delete(req.params.id)
+    deviceService.delete(req.params.id, req.body)
         .then(() => res.json({}))
         .catch(err => next(err));
 }

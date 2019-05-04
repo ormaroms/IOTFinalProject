@@ -45,9 +45,8 @@ async function getById(id) {
 }*/
 
 async function update(id, statusParam) {
-    // If it is a request from the arduino
     if (Object.keys(statusParam).length == 1)
-        statusParam = (JSON.parse(Object.keys(statusParam)[0]))
+        statusParam = (JSON.parse(Object.keys(statusParam)[0]));
 
     if (await Status.findOne({ arduinoId: id })) {
         await Status.remove({ arduinoId: id});

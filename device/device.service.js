@@ -14,10 +14,9 @@ async function create(id ,deviceParam) {
         await device.save();
     } else {
         let userDevices = await Device.findOne({ userId: id});
-        console.log(userDevices);
         let device = userDevices.devices.filter(device => device.id === deviceParam.devices[0].id);
 
-        if(device.length != 0){
+        if (device.length != 0) {
             throw new Error('Device Id = ' + device[0].id + ' Already exists!');
         } else {
             await userDevices.devices.push(deviceParam.devices[0]);
@@ -41,8 +40,24 @@ async function update(id, deviceParam) {
     return await Device.find({userId: id}).select('-_id');
 }
 
-async function _delete(id) {
-    await Device.findByIdAndRemove(id);
+async function _delete(id, deviceContent) {
+    console.log("anna little alhazov " + deviceContent.arduinoId);
+    //await Device.findByIdAndRemove(id);
+
+    let userDevices = await Device.findOne({ userId: id});
+    if (userDevices) {
+        let device = userDevices.devices.filter(device => device.id === deviceContent.arduinoId);
+
+        if (device.length != 0) {
+            userDevices.remove(device);
+            let userDevicesData = userDevices.devices.filter(device => device.id !== deviceContent.arduinoId);
+            userDevices.devices = userDevicesData;
+        } else {
+            throw new Error('userId ' + id + ' has no devices with an id ' + deviceContent.arduinoId);
+        }
+    } else {
+        throw new Error('No such user id with the id ' + id);
+    }
 }
 
 module.exports = {
