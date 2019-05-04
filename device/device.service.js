@@ -2,20 +2,13 @@ const db = require('_helpers/db');
 const Device = db.Device;
 
 async function getById(id) {
-    return await Device.findOne({ userId: id }, {_id: 0}).then(result => {return {"devices": result.devices}});
+    return await Device.findOne({ userId: id }, {_id: 0}).then(
+        result => {return {"devices": result.devices}}).catch(error => {
+        throw new Error('userId ' + id + ' has no devices');
+    });
 }
 
 async function create(id ,deviceParam) {
-    // if (await Device.findOne({ userId: id })) {
-    //     await Device.remove({ userId: id});
-    //
-    // }
-    //     const device = new Device(deviceParam);
-    //
-    //     await device.save();
-    //
-    // return await Device.find({userId: id}, {_id: 0}).then(result => {return {"devices": result.devices}});
-
     if (!await Device.findOne({ userId: id })) {
         const device = new Device(deviceParam);
         await device.save();
