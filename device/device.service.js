@@ -22,7 +22,6 @@ async function create(id ,deviceParam) {
             await userDevices.devices.push(deviceParam.devices[0]);
         }
 
-        await userDevices.devices.push(deviceParam.devices[0]);
         await userDevices.save();
     }
 
@@ -41,17 +40,15 @@ async function update(id, deviceParam) {
 }
 
 async function _delete(id, deviceContent) {
-    console.log("anna little alhazov " + deviceContent.arduinoId);
-    //await Device.findByIdAndRemove(id);
-
     let userDevices = await Device.findOne({ userId: id});
     if (userDevices) {
         let device = userDevices.devices.filter(device => device.id === deviceContent.arduinoId);
 
         if (device.length != 0) {
-            userDevices.remove(device);
             let userDevicesData = userDevices.devices.filter(device => device.id !== deviceContent.arduinoId);
             userDevices.devices = userDevicesData;
+            await userDevices.save();
+            console.log("worked");
         } else {
             throw new Error('userId ' + id + ' has no devices with an id ' + deviceContent.arduinoId);
         }
