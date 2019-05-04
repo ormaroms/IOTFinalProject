@@ -8,26 +8,12 @@ async function getAll() {
 }
 
 async function getLatestArduinoStatusById(deviceId) {
-    return await Status.find({arduinoId: deviceId}).sort({$natural: -1}).limit(1);
+    return await Status.find({arduinoId: deviceId},{ __v: 0, _id: 0, id: 0}).sort({$natural: -1}).limit(1);
 }
 
-async function getArduinoStatusById(deviceId) {
-    return await Status.find({arduinoId: deviceId});
+async function getArduinoHistory(deviceId) {
+    return await Status.find({arduinoId: deviceId},{ __v: 0, id: 0, _id: 0});
 }
-
-// Dumbed down for the POC
-// async function getById(id) {
-//     let arduinoStatus = await getArduinoStatusById(id);
-//
-//     if(arduinoStatus[0]) {
-//         return await {
-//             "arduinoID": id,
-//             "gasStatus": (arduinoStatus[0]).gasStatus,
-//             "lightStatus": (arduinoStatus[0]).lightStatus
-//         }
-//     }
-// }
-
 
 async function getByUserId(UserId) {
     let userDevices = await Device.findOne({ userId: UserId});
@@ -97,6 +83,7 @@ async function _delete(id) {
 module.exports = {
     getAll,
     getByUserId,
+    getArduinoHistory,
     create,
     update,
     delete: _delete

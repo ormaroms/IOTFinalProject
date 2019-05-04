@@ -3,6 +3,7 @@ const router = express.Router();
 const statusService = require('./status.service');
 
 router.get('/', getAll);
+router.get('/getArduinoHistory/:id', getArduinoHistory);
 router.get('/:id', getById);
 router.put('/:id', update);
 router.post('/:id', create);
@@ -11,6 +12,12 @@ router.delete('/:id', _delete);
 function getAll(req, res, next) {
     statusService.getAll()
         .then(users => res.json(users))
+        .catch(err => next(err));
+}
+
+function getArduinoHistory(req, res, next) {
+    statusService.getArduinoHistory(req.params.id)
+        .then(statuses => res.json(statuses))
         .catch(err => next(err));
 }
 
