@@ -30,6 +30,11 @@ const styles = theme => ({
     addButton: {
         color: "black",
         cursor: "pointer"
+    },
+    tableRows: {
+        height: '200px',
+maxHeight: '200px',
+overflowY: 'scroll'
     }
 });
 export default styles;

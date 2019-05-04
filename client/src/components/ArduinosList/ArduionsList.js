@@ -49,46 +49,15 @@ class ArduionsList extends Component {
     routeToCurrentStatus() { // redirect to Status
     }
 
-    routeToAddArduino() {
-        history.push('addArduino');
-    }
-
     handleAddRow = (e) => {
-
-        debugger;
         e.preventDefault();
-        this.state.devices.push({"id": this.id.value,
-            "name": this.name.value});
         this.props.addNewDevice(this.props.token,
-            this.state.devices);
-
-
-        // const newDevice = {
-        //     id: "",
-        //     name: ""
-        // };
-        // this.setState({
-        //     devices: [...this.state.devices, newDevice]
-        // });
+            this.id.value, this.name.value);
+        e.target.reset();
     };
 
     handleDeleteRow = (deviceIdToDelete) => {
-
-
-        // // Get the index of the device
-        // let deviceIndex = this.state.devices.findIndex(function(device){
-        //     return device.id == deviceIdToDelete;
-        // })
-        //
-        // // Delete
-        // debugger;
-        // const newDevice = {
-        //     id: "",
-        //     name: ""
-        // };
-        // this.setState({
-        //     devices: [...this.state.devices, newDevice]
-        // });
+        this.props.deleteDevice(this.props.token, deviceIdToDelete);
     };
 
     render() {
@@ -113,46 +82,50 @@ class ArduionsList extends Component {
                                 <TableCell></TableCell>
                             </TableRow>
                         </TableHead>
-                        <TableBody>
 
-                        { this.state.devices && this.state.devices.map( (device,index) => {
-                            return(
-                                <TableRow key={index}>
-                                    <TableCell component="th" scope="row">
-                                        {device.id}
-                                    </TableCell>
-                                    <TableCell>{device.name}</TableCell>
-                                    <TableCell><DeleteIcon onClick={() => this.handleDeleteRow(device.id)}/></TableCell>
-                                </TableRow>
-                            )
-                        })}
-                        </TableBody>
                     </Table>
+
+                    <div style={{ overflow: 'auto', height: '150px' }}>
+                        <Table style={{tableLayout: 'fixed'}}>
+                            <TableBody className={classes.tableRows}>
+
+                                { this.state.devices && this.state.devices.map( (device,index) => {
+                                    return(
+                                        <TableRow key={index}>
+                                            <TableCell component="th" scope="row">
+                                                {device.id}
+                                            </TableCell>
+                                            <TableCell>{device.name}</TableCell>
+                                            <TableCell><DeleteIcon onClick={() => this.handleDeleteRow(device.id)}/></TableCell>
+                                        </TableRow>
+                                    )
+                                })}
+                            </TableBody>
+                        </Table>
+                    </div>
 
                     <form onSubmit={this.handleAddRow}>
                     <Grid container spacing={24}>
-                        <Grid item xs={4}>
+                        <Grid item xs={5}>
                             <TextField
                                 id="id"
                                 inputRef={el => this.id = el}
+                                style = {{width: 95}}
                             />
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item xs={5}>
                             <TextField
                                 id="name"
                                 inputRef={el => this.name = el}
+                                style = {{width: 100}}
                             />
                         </Grid>
-                        <Grid item xs={4}>
-                            <Button type="submit" variant="contained" color="primary" className={classes.button}>
-                                Add
+                        <Grid item xs={2}>
+                            <Button type="submit" >
+                                <AddCircle/>
                             </Button>
                         </Grid>
                     </Grid>
-
-
-
-
 
 
                     </form>
