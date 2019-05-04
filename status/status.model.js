@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
-    arduinoId: { type: String, unique: true, required: true },
+    arduinoId: { type: String, unique: false, required: true },
     gasStatus: { type: Boolean, required: true },
-    lightStatus: { type: Boolean, default: Date.now },
+    lightStatus: { type: Boolean},
     time: { type: Date, default: Date.now }
 });
 

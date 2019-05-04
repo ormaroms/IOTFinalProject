@@ -1,51 +1,60 @@
 ﻿const db = require('_helpers/db');
 const devices = require('../device/device.service');
 const Status = db.Status;
+const Device = db.Device;
 
 async function getAll() {
     return await Status.find({},{ __v: 0});
 }
 
-async function getArduinoStatusById(device) {
-    return await Status.find({arduinoId: device});
+async function getLatestArduinoStatusById(deviceId) {
+    return await Status.find({arduinoId: deviceId}).sort({$natural: -1}).limit(1);
+}
+
+async function getArduinoStatusById(deviceId) {
+    return await Status.find({arduinoId: deviceId});
 }
 
 // Dumbed down for the POC
-async function getById(id) {
-    let arduinoStatus = await getArduinoStatusById(id);
+// async function getById(id) {
+//     let arduinoStatus = await getArduinoStatusById(id);
+//
+//     if(arduinoStatus[0]) {
+//         return await {
+//             "arduinoID": id,
+//             "gasStatus": (arduinoStatus[0]).gasStatus,
+//             "lightStatus": (arduinoStatus[0]).lightStatus
+//         }
+//     }
+// }
 
-    if(arduinoStatus[0]) {
-        return await {
-            "arduinoID": id,
-            "gasStatus": (arduinoStatus[0]).gasStatus,
-            "lightStatus": (arduinoStatus[0]).lightStatus
+
+async function getByUserId(UserId) {
+    let userDevices = await Device.findOne({ userId: UserId});
+    let jsonArray = [];
+
+    if (userDevices) {
+        for (let device of userDevices.devices) {
+            let arduinoStatus = await getLatestArduinoStatusById(device.id);
+
+            if(arduinoStatus[0]) {
+                jsonArray.push({
+                    "id": device.id,
+                    "name": device.name,
+                    "gasStatus": (arduinoStatus[0]).gasStatus,
+                    "lightStatus": (arduinoStatus[0]).lightStatus
+                });
+            }
         }
+
+        return await jsonArray;
+    } else {
+        throw new Error('User Id = ' + id + ' Doesnt have arduinos!');
     }
 }
 
-
-/*async function getById(id) {
-    let userDevices = await devices.getById(id);
-    let jsonArray = [];
-
-    for (let device of userDevices.devices) {
-        let arduinoStatus = await getArduinoStatusById(device);
-
-        if(arduinoStatus[0]) {
-            jsonArray.push({
-                "id": device.id,
-                "name": device.name,
-                "gasStatus": (arduinoStatus[0]).gasStatus,
-                "lightStatus": (arduinoStatus[0]).lightStatus
-            });
-        }
-    }
-
-    return await jsonArray;
-}*/
-
 async function update(id, statusParam) {
-    if (Object.keys(statusParam).length == 1)
+    if (Object.keys(statusParam).length === 1)
         statusParam = (JSON.parse(Object.keys(statusParam)[0]));
 
     if (await Status.findOne({ arduinoId: id })) {
@@ -57,11 +66,6 @@ async function update(id, statusParam) {
 }
 
 async function create(id, statusParam) {
-    if (await Status.findOne({ arduinoId: id })) {
-        await Status.remove({ arduinoId: id});
-
-    }
-
     let isLightOn = false;
     let isGasOn = false;
 
@@ -92,7 +96,7 @@ async function _delete(id) {
 
 module.exports = {
     getAll,
-    getById,
+    getByUserId,
     create,
     update,
     delete: _delete

@@ -15,7 +15,7 @@ function getAll(req, res, next) {
 }
 
 function getById(req, res, next) {
-    statusService.getById(req.params.id)
+    statusService.getByUserId(req.params.id)
         .then(status => status ? res.json(status) : res.sendStatus(404))
         .catch(err => next(err));
 }
