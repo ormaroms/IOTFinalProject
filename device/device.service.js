@@ -10,16 +10,16 @@ async function getById(id) {
 
 async function create(id ,deviceParam) {
     if (!await Device.findOne({ userId: id })) {
-        const device = new Device(deviceParam);
+        const device = new Device({"userId": id, "devices":[{deviceParam}]});
         await device.save();
     } else {
         let userDevices = await Device.findOne({ userId: id});
-        let device = userDevices.devices.filter(device => device.id === deviceParam.devices[0].id);
+        let device = userDevices.devices.filter(device => device.id === deviceParam.id);
 
         if (device.length !== 0) {
             throw new Error('Device Id = ' + device[0].id + ' Already exists!');
         } else {
-            await userDevices.devices.push(deviceParam.devices[0]);
+            await userDevices.devices.push(deviceParam);
         }
 
         await userDevices.save();
@@ -32,13 +32,13 @@ async function update(id, deviceParam) {
     let userDevices = await Device.findOne({ userId: id});
 
     if (userDevices) {
-        let device = userDevices.devices.filter(device => device.id === deviceParam.devices[0].id);
+        let device = userDevices.devices.filter(device => device.id === deviceParam.id);
 
         if (device.length === 0) {
-            throw new Error('Device Id = ' + deviceParam.devices[0].id + ' Doesnt exists!');
+            throw new Error('Device Id = ' + deviceParam.id + ' Doesnt exists!');
         } else {
-            let filtersDevices = userDevices.devices.filter(device => device.id !== deviceParam.devices[0].id);
-            filtersDevices.push(deviceParam.devices[0]);
+            let filtersDevices = userDevices.devices.filter(device => device.id !== deviceParam.id);
+            filtersDevices.push(deviceParam);
             userDevices.devices = filtersDevices;
 
             await userDevices.save();
