@@ -1,0 +1,274 @@
+﻿מסמך API בערך יותר מעודכן, אין לי כח לפרט, כל מה שהקליינט פונה יצטרך טוקן, כל מה שהארדואינים פונים כמובן שלא צריך טוקן, מקווה שתבינו לבד מה כן ומה לא.
+אשלח פה איך פונים ומה מקבלים בלבד: 
+מצפה להבין לבן היכן נכנס בURL משתנה /:id לפי הURLים בפרסמתי
+יש id מג'ונזט עי השרת ויש id רגיל שהוא קצר יותר.
+
+
+USERES ROUTES
+
+
+להרשמה של יוזר: POST
+
+
+https://iot-gas-monitor.herokuapp.com/users/register
+
+
+{
+        "username": "or marom",
+        "password": "123456"
+}
+ result: OK
+
+
+לאונטנטיקציה של יוזר: POST
+
+
+https://iot-gas-monitor.herokuapp.com/users/authenticate
+{
+        "username": "or marom",
+        "password": "123456"
+}
+
+
+result:
+{
+  "_id": "5caba627e4b63200044dc316",
+  "username": "or marom",
+  "password": "$2a$10$dlDOiAhLmMw88.9eg4A5J.i1FNI0.S.qvY5MjGRlFC4b/6P0HqVfS",
+  "createdDate": "2019-04-08T19:51:03.106Z",
+  "__v": 0,
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1Y2FiYTYyN2U0YjYzMjAwMDQ0ZGMzMTYiLCJpYXQiOjE1NTQ3NTM0NTR9.TwBSFjQKqZDEnoslXa0a3X_M_LPkYWeFU_u1BGq8aKs"
+}
+
+
+לקבל יוזר מסויים : GET
+
+https://iot-gas-monitor.herokuapp.com/users/5caba627e4b63200044dc316
+result:
+{
+  "_id": "5caba627e4b63200044dc316",
+   "username": "or marom",
+  "createdDate": "2019-04-08T19:51:03.106Z",
+  "id": "5caba627e4b63200044dc316"
+}
+לצורך קבלת כל היוזרים: GET
+
+
+https://iot-gas-monitor.herokuapp.com/users/
+result:
+[
+  {
+    "username": "anna alhazov",
+    "createdDate": "2019-04-08T19:51:03.106Z",
+    "id": "5caba627e4b63200044dc316"
+  }, ...
+
+
+]
+
+
+
+
+
+
+לעדכן פרטי יוזר: PUT
+
+
+https://iot-gas-monitor.herokuapp.com/users/5caba627e4b63200044dc316
+{
+        "username": "anna alhazov"
+}
+result: OK
+
+
+כדי למחוק יוזר: DEL
+https://iot-gas-monitor.herokuapp.com/users/5caba627e4b63200044dc316
+result: OK
+
+
+DEVICES ROUTES
+להוסיף ארדואינו ליוזר: POST
+
+
+https://iot-gas-monitor.herokuapp.com/devices/5caba627e4b63200044dc316
+{
+                         "id": "1231",
+                         "name": "newArduino"
+}
+result: ALL THE USER ARDUINOS:
+{
+  "devices": [
+    {
+      "_id": "5ccdc6d7b88750140ca28a05",
+      "id": "1231",
+      "name": "newArduino"
+    },
+    {
+      "_id": "5ccdd61adfcb554b0466f17c",
+      "id": "654321",
+      "name": "ArduinoAnnaArdunioAnna1223"
+    },
+    {
+      "_id": "5ccdd68adfcb554b0466f17d",
+      "id": "15935758",
+      "name": "NewOne"
+    }
+]
+
+
+לקבל את הארדואינואים של היוזר: GET
+
+
+https://iot-gas-monitor.herokuapp.com/devices/5caba627e4b63200044dc316
+result:
+{
+  "devices": [
+    {
+      "_id": "5ccdc6d7b88750140ca28a05",
+      "id": "123456",
+      "name": "OutdoorArduino"
+    },
+    {
+      "_id": "5ccdd61adfcb554b0466f17c",
+      "id": "654321",
+      "name": "ArduinoAnnaArdunioAnna1223"
+    },
+    {
+      "_id": "5ccdd68adfcb554b0466f17d",
+      "id": "15935758",
+      "name": "NewOne"
+    }
+]
+
+
+לעדכן את הארדואינו של היוזר : PUT
+
+
+https://iot-gas-monitor.herokuapp.com/devices/5caba627e4b63200044dc316
+{
+                         "id": "1231",
+                         "name": "ardunoUpdate"
+}
+result: ALL THE USER ARDUINOS:
+{
+  "devices": [
+    {
+      "_id": "5ccdc6d7b88750140ca28a05",
+      "id": "1231",
+      "name": "ardunoUpdate"
+    },
+    {
+      "_id": "5ccdd61adfcb554b0466f17c",
+      "id": "654321",
+      "name": "ArduinoAnnaArdunioAnna1223"
+    },
+    {
+      "_id": "5ccdd68adfcb554b0466f17d",
+      "id": "15935758",
+      "name": "NewOne"
+    }
+]
+
+
+למחוק ארדואינו של יוזר: DEL
+https://iot-gas-monitor.herokuapp.com/5c7021dbd069ea2be493cbf5
+{
+        "arduinoId": "111"
+}
+result: ALL THE USER ARDUINOS THAT LEFT:
+{
+  "devices": [
+    {
+      "_id": "5ccdc6d7b88750140ca28a05",
+      "id": "1231",
+      "name": "ardunoUpdate"
+    },
+    {
+      "_id": "5ccdd61adfcb554b0466f17c",
+      "id": "654321",
+      "name": "ArduinoAnnaArdunioAnna1223"
+    },
+    {
+      "_id": "5ccdd68adfcb554b0466f17d",
+      "id": "15935758",
+      "name": "NewOne"
+    }
+]
+
+
+
+
+
+
+                Statuses ROUTES
+
+
+
+
+לקבל את הסטטוסים של כל האדואינואים של יוזר מסויים: GET
+https://iot-gas-monitor.herokuapp.com/status/5c7021dbd069ea2be493cbf5
+
+
+result:
+[
+  {
+    "id": "159358",
+    "name": "qazsxdcfv",
+    "gasStatus": true,
+    "lightStatus": true
+  },
+  {
+    "id": "123574",
+    "name": "sssssss",
+    "gasStatus": false,
+    "lightStatus": true
+  }
+]
+
+
+כדי לקבל את היסטוריית הסטטוסים של אדואינו מסויים (בשביל עמוד הסטטיסטיקות): GET
+https://iot-gas-monitor.herokuapp.com/getArduinoHistory/123574 
+result:
+result:
+[
+  {
+    "arduinoId": "123574",
+    "time": "2019-05-04T21:23:14.082Z",
+    "lightStatus": false,
+    "gasStatus": false
+  },
+  {
+    "arduinoId": "123574",
+    "time": "2019-05-04T21:23:21.236Z",
+    "lightStatus": true,
+    "gasStatus": false
+  },
+  {
+    "arduinoId": "123574",
+    "time": "2019-05-04T21:38:40.684Z",
+    "lightStatus": true,
+    "gasStatus": false
+  }
+]
+
+
+בשביל הארדואינו - להוסיף סטטוס חדש (כמובן שהוא מתווסף עם timeline):  פוסט
+https://iot-gas-monitor.herokuapp.com/status/1
+{
+        "gasStatus": 1,
+        "lightStatus": 0
+}
+
+
+result: OK
+
+
+לעדכן סטטוס של אדואינו: PUT
+https://iot-gas-monitor.herokuapp.com/status/1
+{
+        "gasStatus": 1,
+        "lightStatus": 1
+}
+
+
+result: OK
