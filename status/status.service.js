@@ -13,7 +13,6 @@ async function getLatestArduinoStatusById(deviceId) {
 
 async function getArduinoHistory(UserId) {
     let userArduinos = await this.getByUserId(UserId);
-    console.log(userArduinos);
     let userHistoryOfAllArduinos = [];
     userArduinos.forEach((device) => {
 
