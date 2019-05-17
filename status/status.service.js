@@ -11,7 +11,27 @@ async function getLatestArduinoStatusById(deviceId) {
     return await Status.find({arduinoId: deviceId},{ __v: 0, _id: 0, id: 0}).sort({$natural: -1}).limit(1);
 }
 
-async function getArduinoHistory(deviceId) {
+async function getArduinoHistory(UserId) {
+    let userArduinos = await this.getByUserId(UserId);
+    console.log(userArduinos);
+    let userHistoryOfAllArduinos = [];
+    userArduinos.forEach((device) => {
+
+    });
+
+    for (let device of userArduinos) {
+        let historyOfDevice = await getSpecificArduinoHistory(device.id);
+        userHistoryOfAllArduinos.push({
+            "id": device.id,
+            "history": historyOfDevice
+        });
+    }
+
+    return await userHistoryOfAllArduinos;
+}
+
+
+async function getSpecificArduinoHistory(deviceId) {
     return await Status.find({arduinoId: deviceId},{ __v: 0, id: 0, _id: 0});
 }
 
