@@ -3,7 +3,7 @@ const styles = theme => ({
         ...theme.mixins.gutters(),
         // paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
-        height: '350px',
+        height: '370px',
         width: '400px',
         paddingRight: '0px !important',
         paddingLeft: '0px !important'
@@ -26,6 +26,14 @@ const styles = theme => ({
     signUp: {
         textDecoration: "underline",
         cursor: "pointer"
+    },
+    error: {
+        color: "red",
+        fontSize: "18px",
+        margin: "5px"
+    },
+    field: {
+        margin: "10px"
     }
 });
 export default styles;

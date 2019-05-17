@@ -33,7 +33,6 @@ class ArduionsList extends Component {
     }
     componentWillReceiveProps(nextProps) {
         debugger;
-        console.log("HERE");
         console.log(nextProps);
         this.setState({ devices: nextProps.devices });
     }
