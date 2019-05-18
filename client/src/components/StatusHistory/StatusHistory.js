@@ -20,19 +20,20 @@ class statusHistory extends Component{
     }
 
     handleExpand = (player) =>{
+        debugger;
         let newExpandedRows = [...this.state.expandedRows];
         let allExpanded = this.state.allExpanded;
         let idxFound = newExpandedRows.findIndex((id)=>{
-            return id === player.history.arduinoId;
+            return id === player.id;
         });
 
         if(idxFound > -1){
-            console.log("Collapsing " + player.history.arduinoId + " " + idxFound);
+            console.log("Collapsing " + player.id + " " + idxFound);
             newExpandedRows.splice(idxFound, 1);
         }
         else{
-            console.log("Expanding " + player.history.arduinoId);
-            newExpandedRows.push(player.history.arduinoId);
+            console.log("Expanding " + player.id);
+            newExpandedRows.push(player.id);
         }
 
         console.log("Expanded rows");
@@ -44,7 +45,7 @@ class statusHistory extends Component{
     isExpanded = (player)=>{
         const idx = this.state.expandedRows.find(
             (id)=>{
-                return id === player.history.arduinoId;
+                return id === player.id;
             }
         );
 
@@ -81,36 +82,36 @@ class statusHistory extends Component{
                         {this.isExpanded(player) ? "-" : "+"}
                     </button>
                 </td>
-                <td>{player.history.time}</td>
-                <td>{player.history.lightStatus}</td>
-                <td>{player.history.gasStatus}</td>
+                <td>{player.id}</td>
             </tr>
         )
 
         rows.push(firstRow);
-
+debugger;
         if(this.isExpanded(player)){
             const detailRow = (
-                <tr className="player-details">
-                    <td colspan="4" className="player-details">
-                        <br/>
-                        <div className="attribute">
-                            <div className="attribute-name">Height: </div>
-                            <div className="attribute-value">{player.history.arduinoId}</div>
-                        </div>
-                        <br/>
-                        <div className="attribute">
-                            <div className="attribute-name">Weight: </div>
-                            <div className="attribute-value">{player.history.arduinoId}</div>
-                        </div>
-                        <br/>
-                        <div className="attribute">
-                            <div class="attribute-name">College: </div>
-                            <div className="attribute-value">{player.history.arduinoId}</div>
-                        </div>
-                        <br/>
-                    </td>
-                </tr>
+                player.history.map( (history) => {
+                       return( <tr className="player-details">
+                            <td colSpan="4" className="player-details">
+                                <br/>
+                                <div className="attribute">
+                                    <div className="attribute-name">Height:</div>
+                                    <div className="attribute-value">{history.time}</div>
+                                </div>
+                                <br/>
+                                <div className="attribute">
+                                    <div className="attribute-name">Weight:</div>
+                                    <div className="attribute-value">{player.history.arduinoId}</div>
+                                </div>
+                                <br/>
+                                <div className="attribute">
+                                    <div className="attribute-name">College:</div>
+                                    <div className="attribute-value">{player.history.arduinoId}</div>
+                                </div>
+                                <br/>
+                            </td>
+                        </tr>)
+                    })
             );
             rows.push(detailRow);
         }
@@ -132,9 +133,8 @@ class statusHistory extends Component{
                             {players.length === this.state.expandedRows.length ? "-" : "+"}
                         </button>
                     </th>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Team</th>
+                    <th>Device id</th>
+
                 </tr>
                 {playerRows}
             </table>
