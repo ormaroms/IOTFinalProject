@@ -10,7 +10,8 @@ async function getById(id) {
 
 async function create(id ,deviceParam) {
     if (!await Device.findOne({ userId: id })) {
-        const device = new Device({"userId": id, "devices":[{deviceParam}]});
+        const device = new Device({"userId": id, "devices":[]});
+        device.devices.push(deviceParam);
         await device.save();
     } else {
         let userDevices = await Device.findOne({ userId: id});
