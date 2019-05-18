@@ -14,6 +14,7 @@ import {
 } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
+import BarChart from '@material-ui/icons/BarChart';
 import history from '../../history';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircle from '@material-ui/icons/Add';
@@ -49,6 +50,10 @@ class ArduionsList extends Component {
 
     routeToCurrentStatus() { // redirect to Status
     }
+    routeToStatusHistory(){
+        history.push('statusHistory')
+    }
+
 
     handleAddRow = (e) => {
         e.preventDefault();
@@ -80,9 +85,13 @@ debugger;
             <Fragment>
                 <Paper className={classes.root} elevation={1}>
                     <AppBar className={classes.header} position="static" color="default">
+                        <p className={classes.text}>
+                            Dont have an account yet? <a href className={classes.signUp} onClick={this.routeToStatusHistory}> Sign up </a>
+                        </p>
+
 
                         <Typography className={classes.title}>
-                            Your Arduions
+                            Your Arduions dddddddddddddddddddd
                         </Typography>
                     </AppBar>
                     
