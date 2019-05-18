@@ -14,10 +14,10 @@ import {
 } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
-import BarChart from '@material-ui/icons/BarChart';
 import history from '../../history';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircle from '@material-ui/icons/Add';
+import BarChart from '@material-ui/icons/BarChart';
 
 // This is the current status component
 // Will get the isLit isGasLeaking arduinoID from the props! ( in the future, after the POC) *propTypes
@@ -85,13 +85,14 @@ debugger;
             <Fragment>
                 <Paper className={classes.root} elevation={1}>
                     <AppBar className={classes.header} position="static" color="default">
-                        <p className={classes.text}>
-                            Dont have an account yet? <a href className={classes.signUp} onClick={this.routeToStatusHistory}> Sign up </a>
-                        </p>
+                        <BarChart onClick={this.routeToStatusHistory}/>
+                        {/*<p className={classes.text}>*/}
+                        {/*    Dont have an account yet? <a href className={classes.signUp} onClick={this.routeToStatusHistory}> Sign up </a>*/}
+                        {/*</p>*/}
 
 
                         <Typography className={classes.title}>
-                            Your Arduions dddddddddddddddddddd
+                            Your Arduions
                         </Typography>
                     </AppBar>
                     
