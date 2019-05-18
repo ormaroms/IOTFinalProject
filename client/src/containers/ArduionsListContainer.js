@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import ArduionsList from '../components/ArduinosList/ArduionsList'
-import {arduionsListLoaded, deviceActionSucceeded} from '../actions/arduionsList'
+import {arduionsListLoaded, deviceActionSucceeded, deviceAdditoinField} from '../actions/arduionsList'
 import {getUserDevices, addNewDevice, deleteDevice, updateDevice} from '../serverapi';
 
 
@@ -35,7 +35,8 @@ const mapDispatchToProps = dispatch => {
             }).catch(err => {
                 debugger;
                 console.log("Error in device addition with id " + newDeviceId);
-                console.log(err);
+                console.log(err.response);
+                dispatch(deviceAdditoinField(err.response.data.message));
             })
         },
         deleteDevice: (token, deviceToDelete) => {

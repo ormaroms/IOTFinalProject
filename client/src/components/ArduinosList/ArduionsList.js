@@ -29,30 +29,43 @@ class ArduionsList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {devices: []};
+        debugger;
+        this.state = {errorMsg: "",
+            devices: []
+        };
     }
     componentWillReceiveProps(nextProps) {
         debugger;
-        console.log(nextProps);
-        this.setState({ devices: nextProps.devices });
+
+        if (nextProps.errorMsg) {
+            this.setState({ errorMsg: nextProps.errorMsg});
+        } else if (nextProps.devices){
+            if (this.state.formElement) {
+                this.state.formElement.reset();
+            }
+            this.setState({ devices: nextProps.devices, errorMsg: ""});
+        }
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     this.setState({ chips: this.nextProps.tags_list });
-    // }(){
-    //     debugger;
-    //     this.state = {
-    //         devices: this.props.devices
-    //     }
-    // }
     routeToCurrentStatus() { // redirect to Status
     }
 
     handleAddRow = (e) => {
         e.preventDefault();
-        this.props.addNewDevice(this.props.token,
-            this.id.value, this.name.value);
-        e.target.reset();
+
+debugger;
+        let arduinoId = this.id.value;
+        let arduinoName = this.name.value;
+
+        if (arduinoId == '' || arduinoName == '') {
+            this.setState({errorMsg: "Field can not be empty"})
+        } else if (isNaN(arduinoId)) {
+            this.setState({errorMsg: "Device id field must contain only numbers"})
+        } else {
+            this.props.addNewDevice(this.props.token,
+                this.id.value, this.name.value);
+            this.setState({formElement: e.target})
+        }
     };
 
     handleDeleteRow = (deviceIdToDelete) => {
@@ -108,6 +121,7 @@ class ArduionsList extends Component {
                         <Grid item xs={5}>
                             <TextField
                                 id="id"
+                                // type="number"
                                 inputRef={el => this.id = el}
                                 style = {{width: 95}}
                             />
@@ -125,9 +139,9 @@ class ArduionsList extends Component {
                             </Button>
                         </Grid>
                     </Grid>
-
-
                     </form>
+
+                    <p className={classes.error}>{this.state.errorMsg}</p>
 
                 {/*<AddCircle className={classes.addButton} onClick={this.handleAddRow}/>*/}
                 </Paper>

@@ -8,7 +8,6 @@ import StatusContainer from "./containers/StatusContainer";
 import RegisterContainer from "./containers/RegisterContainer"
 import LoginContainer from "./containers/LoginContainer"
 import ArduionsListContainer from "./containers/ArduionsListContainer"
-import AddArduinoContainer from "./containers/AddArduinoContainer"
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { Router, Route } from 'react-router-dom';
 import history from './history'
@@ -37,7 +36,6 @@ class App extends Component {
                             <Route path="/register" component={RegisterContainer} />
                             <Route path="/status" component={StatusContainer} />
                             <Route path="/arduionsList" component={ArduionsListContainer} />
-                            <Route path="/addArduino" component={AddArduinoContainer} />
                         </Router>
                     </header>
                 </div>
