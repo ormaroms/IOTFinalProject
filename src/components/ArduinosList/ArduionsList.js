@@ -144,7 +144,7 @@ class ArduionsList extends Component {
                             <Grid item xs={5}>
                                 <TextField
                                     id="name"
-                                    placeholder="Arduino Name"
+                                    placeholder="Name"
                                     inputRef={el => this.name = el}
                                     style={{width: 100}}
                                 />
