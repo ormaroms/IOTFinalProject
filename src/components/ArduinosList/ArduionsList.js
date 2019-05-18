@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, {Component, Fragment} from 'react';
 import styles from './ArduionsList.css'
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import {
     Table,
     TableBody,
@@ -31,26 +31,29 @@ class ArduionsList extends Component {
     constructor(props) {
         super(props);
         debugger;
-        this.state = {errorMsg: "",
+        this.state = {
+            errorMsg: "",
             devices: []
         };
     }
+
     componentWillReceiveProps(nextProps) {
         debugger;
 
         if (nextProps.errorMsg) {
-            this.setState({ errorMsg: nextProps.errorMsg});
-        } else if (nextProps.devices){
+            this.setState({errorMsg: nextProps.errorMsg});
+        } else if (nextProps.devices) {
             if (this.state.formElement) {
                 this.state.formElement.reset();
             }
-            this.setState({ devices: nextProps.devices, errorMsg: ""});
+            this.setState({devices: nextProps.devices, errorMsg: ""});
         }
     }
 
     routeToCurrentStatus() { // redirect to Status
     }
-    routeToStatusHistory(){
+
+    routeToStatusHistory() {
         history.push('statusHistory')
     }
 
@@ -58,7 +61,7 @@ class ArduionsList extends Component {
     handleAddRow = (e) => {
         e.preventDefault();
 
-debugger;
+        debugger;
         let arduinoId = this.id.value;
         let arduinoName = this.name.value;
 
@@ -95,7 +98,7 @@ debugger;
                             Your Arduions
                         </Typography>
                     </AppBar>
-                    
+
                     <Table className={classes.table}>
                         <TableHead>
                             <TableRow>
@@ -107,18 +110,19 @@ debugger;
 
                     </Table>
 
-                    <div style={{ overflow: 'auto', height: '150px' }}>
+                    <div style={{overflow: 'auto', height: '150px'}}>
                         <Table style={{tableLayout: 'fixed'}}>
                             <TableBody className={classes.tableRows}>
 
-                                { this.state.devices && this.state.devices.map( (device,index) => {
-                                    return(
+                                {this.state.devices && this.state.devices.map((device, index) => {
+                                    return (
                                         <TableRow key={index}>
                                             <TableCell component="th" scope="row">
                                                 {device.id}
                                             </TableCell>
                                             <TableCell>{device.name}</TableCell>
-                                            <TableCell><DeleteIcon onClick={() => this.handleDeleteRow(device.id)}/></TableCell>
+                                            <TableCell><DeleteIcon
+                                                onClick={() => this.handleDeleteRow(device.id)}/></TableCell>
                                         </TableRow>
                                     )
                                 })}
@@ -127,33 +131,35 @@ debugger;
                     </div>
 
                     <form onSubmit={this.handleAddRow}>
-                    <Grid container spacing={24}>
-                        <Grid item xs={5}>
-                            <TextField
-                                id="id"
-                                // type="number"
-                                inputRef={el => this.id = el}
-                                style = {{width: 95}}
-                            />
+                        <Grid container spacing={24}>
+                            <Grid item xs={5}>
+                                <TextField
+                                    id="id"
+                                    // type="number"
+                                    placeholder="Arduino Id"
+                                    inputRef={el => this.id = el}
+                                    style={{width: 95}}
+                                />
+                            </Grid>
+                            <Grid item xs={5}>
+                                <TextField
+                                    id="name"
+                                    placeholder="Arduino Name"
+                                    inputRef={el => this.name = el}
+                                    style={{width: 100}}
+                                />
+                            </Grid>
+                            <Grid item xs={2}>
+                                <Button type="submit">
+                                    <AddCircle/>
+                                </Button>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={5}>
-                            <TextField
-                                id="name"
-                                inputRef={el => this.name = el}
-                                style = {{width: 100}}
-                            />
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Button type="submit" >
-                                <AddCircle/>
-                            </Button>
-                        </Grid>
-                    </Grid>
                     </form>
 
                     <p className={classes.error}>{this.state.errorMsg}</p>
 
-                {/*<AddCircle className={classes.addButton} onClick={this.handleAddRow}/>*/}
+                    {/*<AddCircle className={classes.addButton} onClick={this.handleAddRow}/>*/}
                 </Paper>
             </Fragment>
         );
