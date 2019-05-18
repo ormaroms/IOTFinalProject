@@ -14,6 +14,15 @@ export function getUserDevices(token, id) { // The id need to be here
         }
     })
 }
+export function getStatusHistory(token, id) { // The id need to be here
+    return axios.get(SERVER + '/status/' + '5caba627e4b63200044dc316', {
+        headers: {
+            'authorization' : 'Bearer '+token,
+            'Content-Type' : 'application/json'
+        }
+    })
+}
+
 
 export function login(userName, password)
 {

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import CurrentStatus from '../components/CurrentStatus/CurrentStatus'
-import {statusDataFectched} from '../actions/status'
+import {statusDataFetched} from '../actions/status'
 import {getStatus} from '../serverapi/'
 
 
@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => {
         getStatus: (token, id) => {
             getStatus(token, id).then(res => {
                 console.log("Status data fetched")
-                dispatch(statusDataFectched(res.data))
+                dispatch(statusDataFetched(res.data))
             }).catch(err => {
                 console.error("Status data fetched failed")
                 console.error(err)

@@ -1,29 +1,22 @@
 import React, { Component, Fragment } from 'react';
-import styles from './ArduionsList.css'
+import styles from './StatusHistory.css.js'
 import { withStyles } from '@material-ui/core/styles';
 import {Table, TableBody, TableCell, TableHead, TableRow, Paper, Typography} from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
-import BarChart from '@material-ui/icons/BarChart';
 import history from '../../history';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 // This is the current status component
 // Will get the isLit isGasLeaking arduinoID from the props! ( in the future, after the POC) *propTypes
 
-class ArduionsList extends Component {
+class statusHistory extends Component {
 
     componentDidMount() {
-        this.props.getUserDevices(this.props.token);
+        this.props.getStatusHistory(this.props.token);
     }
 
     constructor(props) {
         super(props);
-    }
-
-    routeToCurrentStatus() { // redirect to Status
-    }
-    routeToStatusHistory(){
-        history.push('statusHistory')
     }
 
 
@@ -35,36 +28,33 @@ class ArduionsList extends Component {
             <Fragment>
                 <Paper className={classes.root} elevation={1}>
                     <AppBar className={classes.header} position="static" color="default">
-                        <p className={classes.text}>
-                            Dont have an account yet? <a href className={classes.signUp} onClick={this.routeToStatusHistory}> Sign up </a>
-                        </p>
-
 
                         <Typography className={classes.title}>
-                            Your Arduions dddddddddddddddddddd
+                            status history
                         </Typography>
                     </AppBar>
-                    
+
                     <Table className={classes.table}>
                         <TableHead>
                             <TableRow>
                                 <TableCell>Arduino Id</TableCell>
                                 <TableCell >Name</TableCell>
+                                <TableCell >adirrrr</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
 
-                        {devices && devices.map( (device,index) => {
-                            return(
-                                <TableRow key={index}>
-                                    <TableCell component="th" scope="row">
-                                        {device.id}
-                                    </TableCell>
-                                    <TableCell>{device.name}</TableCell>
-                                    <TableCell><DeleteIcon/></TableCell>
-                                </TableRow>
-                            )
-                        })}
+                            {devices && devices.map( (device,index) => {
+                                return(
+                                    <TableRow key={index}>
+                                        <TableCell component="th" scope="row">
+                                            {device.id}
+                                        </TableCell>
+                                        <TableCell>{device.name}</TableCell>
+                                        <TableCell><DeleteIcon/></TableCell>
+                                    </TableRow>
+                                )
+                            })}
                         </TableBody>
                     </Table>
 
@@ -74,4 +64,4 @@ class ArduionsList extends Component {
     }
 }
 
-export default withStyles(styles)(ArduionsList);
+export default withStyles(styles)(statusHistory);
