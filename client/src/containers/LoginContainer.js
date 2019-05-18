@@ -7,7 +7,6 @@ import history from '../history'
 
 const mapStateToProps = state => {
     return {
-
         ...state
     }
 }
@@ -24,7 +23,7 @@ const mapDispatchToProps = dispatch => {
                 debugger;
                 console.error("User login failed")
                 console.error(err)
-                dispatch(LoginFailed(err))
+                dispatch(LoginFailed(err.response.data.message))
             })
         }
     }

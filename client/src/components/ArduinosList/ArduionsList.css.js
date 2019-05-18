@@ -26,6 +26,20 @@ const styles = theme => ({
     signUp: {
         textDecoration: "underline",
         cursor: "pointer"
+    },
+    addButton: {
+        color: "black",
+        cursor: "pointer"
+    },
+    tableRows: {
+        height: '200px',
+        maxHeight: '200px',
+        overflowY: 'scroll'
+    },
+    error: {
+        color: "red",
+        fontSize: "18px",
+        margin: "5px"
     }
 });
 export default styles;

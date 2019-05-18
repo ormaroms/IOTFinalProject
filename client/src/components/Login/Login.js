@@ -5,6 +5,7 @@ import {Button, TextField, FormControl, FormLabel, Paper, Typography} from '@mat
 import AppBar from '@material-ui/core/AppBar';
 import history from '../../history'
 import {login} from "../../serverapi";
+import Grid from '@material-ui/core/Grid';
 
 
 // This is the current status component
@@ -17,14 +18,26 @@ class Login extends Component {
     }
 
     constructor(props) {
-        debugger;
         super(props);
+        this.state = {errorMsg: ""};
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(e){
         e.preventDefault();
-        this.props.login(this.userName.value, this.password.value)
+        let userName = this.userName.value;
+        let password = this.password.value;
+
+        if (userName == '' || password == '') {
+            this.setState({errorMsg: "Field can not be empty"})
+        } else {
+            this.props.login(this.userName.value, this.password.value);
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        debugger;
+        this.setState({errorMsg: nextProps.errorMsg})
     }
 
     routeToRegister() {
@@ -51,23 +64,31 @@ class Login extends Component {
                     </FormControl>
                     <div className="Login">
                         <form onSubmit={this.handleSubmit}>
-                            <TextField
-                                id="userName"
-                                //className={classNames(classes.margin, classes.textField)}
-                                variant="outlined"
-                                label="User Name"
-                                inputRef={el => this.userName = el}
-                            />
-                            <TextField ref='password'
-                                       type="password"
-                                       variant="outlined"
-                                       inputRef={el => this.password = el}
-                                       label="Password">
-                            </TextField>
+                            <Grid item xs={12} className={classes.field}>
+                                <TextField
+                                    id="userName"
+                                    //className={classNames(classes.margin, classes.textField)}
+                                    variant="outlined"
+                                    label="User Name"
+                                    inputRef={el => this.userName = el}
+                                />
+                            </Grid>
+                            <Grid item xs={12} className={classes.field}>
+                                <TextField ref='password'
+                                           type="password"
+                                           variant="outlined"
+                                           inputRef={el => this.password = el}
+                                           label="Password"
+                                />
+                            </Grid>
 
-                            <Button type="submit" variant="contained" color="primary" className={classes.button}>
-                                Log In
-                            </Button>
+                                <p className={classes.error}>{this.state.errorMsg}</p>
+
+                            <Grid item xs={12}>
+                                <Button type="submit" variant="contained" color="primary" className={classes.button}>
+                                    Log In
+                                </Button>
+                            </Grid>
                         </form>
 
                         <p className={classes.text}>
