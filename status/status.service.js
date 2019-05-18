@@ -4,11 +4,11 @@ const Status = db.Status;
 const Device = db.Device;
 
 async function getAll() {
-    return await Status.find({},{ __v: 0});
+    return await Status.find({}, {__v: 0});
 }
 
 async function getLatestArduinoStatusById(deviceId) {
-    return await Status.find({arduinoId: deviceId},{ __v: 0, _id: 0, id: 0}).sort({$natural: -1}).limit(1);
+    return await Status.find({arduinoId: deviceId}, {__v: 0, _id: 0, id: 0}).sort({$natural: -1}).limit(1);
 }
 
 async function getArduinoHistory(UserId) {
@@ -31,18 +31,18 @@ async function getArduinoHistory(UserId) {
 
 
 async function getSpecificArduinoHistory(deviceId) {
-    return await Status.find({arduinoId: deviceId},{ __v: 0, id: 0, _id: 0});
+    return await Status.find({arduinoId: deviceId}, {__v: 0, id: 0, _id: 0});
 }
 
 async function getByUserId(UserId) {
-    let userDevices = await Device.findOne({ userId: UserId});
+    let userDevices = await Device.findOne({userId: UserId});
     let jsonArray = [];
 
     if (userDevices) {
         for (let device of userDevices.devices) {
             let arduinoStatus = await getLatestArduinoStatusById(device.id);
 
-            if(arduinoStatus[0]) {
+            if (arduinoStatus[0]) {
                 jsonArray.push({
                     "id": device.id,
                     "name": device.name,
@@ -62,8 +62,8 @@ async function update(id, statusParam) {
     if (Object.keys(statusParam).length === 1)
         statusParam = (JSON.parse(Object.keys(statusParam)[0]));
 
-    if (await Status.findOne({ arduinoId: id })) {
-        await Status.remove({ arduinoId: id});
+    if (await Status.findOne({arduinoId: id})) {
+        await Status.remove({arduinoId: id});
 
     }
 
@@ -74,11 +74,11 @@ async function create(id, statusParam) {
     let isLightOn = false;
     let isGasOn = false;
 
-    if(statusParam.gasStatus.toString() === "0") {
+    if (statusParam.gasStatus.toString() === "0") {
         isGasOn = true;
     }
 
-    if(statusParam.lightStatus.toString() === "0") {
+    if (statusParam.lightStatus.toString() === "0") {
         isLightOn = true;
     }
 

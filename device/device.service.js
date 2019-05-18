@@ -17,7 +17,7 @@ async function create(id ,deviceParam) {
         let device = userDevices.devices.filter(device => device.id === deviceParam.id);
 
         if (device.length !== 0) {
-            throw new Error('Device Id = ' + device[0].id + ' Already exists!');
+            throw new Error('Device Id = ' + device[0].id + ' Already exists');
         } else {
             await userDevices.devices.push(deviceParam);
         }
@@ -35,7 +35,7 @@ async function update(id, deviceParam) {
         let device = userDevices.devices.filter(device => device.id === deviceParam.id);
 
         if (device.length === 0) {
-            throw new Error('Device Id = ' + deviceParam.id + ' Doesnt exists!');
+            throw new Error('Device Id = ' + deviceParam.id + ' Doesnt exists');
         } else {
             let filtersDevices = userDevices.devices.filter(device => device.id !== deviceParam.id);
             filtersDevices.push(deviceParam);
