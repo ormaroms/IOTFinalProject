@@ -1,11 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import styles from './StatusHistory.css.js'
 import { withStyles } from '@material-ui/core/styles';
-import {Table, TableBody, TableCell, TableHead, TableRow, Paper, Typography} from '@material-ui/core';
+import {Table, TableBody, TableCell, TableHead, TableRow, Paper, Typography, TextField} from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import history from '../../history';
 import DeleteIcon from '@material-ui/icons/Delete';
 import players from "./players"
+import Button from "@material-ui/core/es/Button/Button";
+import BarChart from "@material-ui/core/SvgIcon/SvgIcon";
+import Grid from "@material-ui/core/Grid";
 
 // This is the current status component
 // Will get the isLit isGasLeaking arduinoID from the props! ( in the future, after the POC) *propTypes
@@ -76,14 +79,14 @@ class statusHistory extends Component{
         let rows = [];
 
         const firstRow = (
-            <tr onClick={()=>this.handleExpand(player)}>
-                <td >
-                    <button>
+            <TableRow onClick={()=>this.handleExpand(player)}>
+                <TableCell >
+                    <Button>
                         {this.isExpanded(player) ? "-" : "+"}
-                    </button>
-                </td>
-                <td>{player.id}</td>
-            </tr>
+                    </Button>
+                </TableCell>
+                <TableCell>{player.id}</TableCell>
+            </TableRow>
         )
 
         rows.push(firstRow);
@@ -91,26 +94,27 @@ debugger;
         if(this.isExpanded(player)){
             const detailRow = (
                 player.history.map( (history) => {
-                       return( <tr className="player-details">
-                            <td colSpan="4" className="player-details">
+                       return( <TableRow className="player-details">
+                            <TableCell colSpan="4" className="player-details">
+                                <br/>
                                 <br/>
                                 <div className="attribute">
-                                    <div className="attribute-name">Height:</div>
+                                    <div className="attribute-name">time used::</div>
                                     <div className="attribute-value">{history.time}</div>
                                 </div>
                                 <br/>
                                 <div className="attribute">
-                                    <div className="attribute-name">Weight:</div>
-                                    <div className="attribute-value">{player.history.arduinoId}</div>
+                                    <div className="attribute-name">Light status:</div>
+                                    <div className="attribute-value">{history.lightStatus.toString()}</div>
                                 </div>
                                 <br/>
                                 <div className="attribute">
-                                    <div className="attribute-name">College:</div>
-                                    <div className="attribute-value">{player.history.arduinoId}</div>
+                                    <div className="attribute-name">Gas status:</div>
+                                    <div className="attribute-value">{history.gasStatus.toString()}</div>
                                 </div>
                                 <br/>
-                            </td>
-                        </tr>)
+                            </TableCell>
+                        </TableRow>)
                     })
             );
             rows.push(detailRow);
@@ -126,26 +130,32 @@ debugger;
         });
 
         return (
-            <table className="my-table">
-                <tr>
-                    <th onClick={()=>this.expandAll(players)}>
-                        <button >
-                            {players.length === this.state.expandedRows.length ? "-" : "+"}
-                        </button>
-                    </th>
-                    <th>Device id</th>
-
-                </tr>
-                {playerRows}
-            </table>
+            <Table style={{tableLayout: 'fixed'}} className="my-table" >
+                    <TableHead>Device id</TableHead>
+                <TableBody>
+                    {playerRows}
+                </TableBody>
+            </Table>
         );
     }
 
     render(){
         return (
-            <div>
-                {this.getPlayerTable()}
-            </div>
+            <Fragment>
+
+                <Paper  elevation={1}>
+                    <AppBar position="static" color="default">
+
+                        <Typography>
+                            Your Arduions history status:
+                        </Typography>
+                    </AppBar>
+
+                    <div style={{ overflow: 'auto', height: '300px' }}>
+                    {this.getPlayerTable()}
+                        </div>
+                </Paper>
+            </Fragment>
         );
     }
 }
