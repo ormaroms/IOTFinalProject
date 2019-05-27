@@ -5,7 +5,6 @@ import {Table, TableBody, TableCell, TableHead, TableRow, Paper, Typography, Tex
 import AppBar from '@material-ui/core/AppBar';
 import history from '../../history';
 import DeleteIcon from '@material-ui/icons/Delete';
-import players from "./players"
 import Button from "@material-ui/core/es/Button/Button";
 import BarChart from "@material-ui/core/SvgIcon/SvgIcon";
 import Grid from "@material-ui/core/Grid";
@@ -33,6 +32,7 @@ class statusHistory extends Component{
             if (this.state.formElement) {
                 this.state.formElement.reset();
             }
+
             this.setState({ devicesHistory: nextProps.devicesHistory});
         }
     }
@@ -140,7 +140,7 @@ debugger;
     }
 
     getPlayerTable = ()=>{
-
+        debugger
         const playerRows = this.state.devicesHistory.map((player)=>{
             return this.getRows(player);
         });
