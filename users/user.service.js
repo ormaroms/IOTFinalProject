@@ -13,7 +13,7 @@ module.exports = {
     delete: _delete
 };
 
-async function authenticate({ username, password }) {
+async function authenticate({ username, password}) {
     const user = await User.findOne({ username });
     if (user && bcrypt.compareSync(password, user.password)) {
         const { hash, ...userWithoutHash } = user.toObject();
@@ -36,6 +36,12 @@ async function getById(id) {
 async function create(userParam) {
     if (await User.findOne({ username: userParam.username })) {
         throw 'Username "' + userParam.username + '" is already taken';
+    }
+
+    if (await User.findOne({email: userParam.email})) {
+        throw 'Email "' + userParam.email + '" is already taken';
+    } else if (!userParam.email) {
+        throw 'Please provide an email';
     }
 
     const user = new User(userParam);
