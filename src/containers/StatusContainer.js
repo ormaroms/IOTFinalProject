@@ -14,8 +14,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 
     return {
-        getStatus: (token, id) => {
-            getStatus(token, id).then(res => {
+        getStatus: (token, userId) => {
+            getStatus(token, userId).then(res => {
+
+
                 console.log("Status data fetched")
                 dispatch(statusDataFetched(res.data))
             }).catch(err => {
