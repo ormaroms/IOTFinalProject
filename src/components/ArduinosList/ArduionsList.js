@@ -117,7 +117,7 @@ class ArduionsList extends Component {
 
                                 {this.state.devices && this.state.devices.map((device, index) => {
                                     return (
-                                        <TableRow key={index} hover >
+                                        <TableRow key={index} hover onClick={() => this.handleRouteToStatus(device.id)}>
                                             <TableCell component="th" scope="row">
                                                 {device.id}
                                             </TableCell>
