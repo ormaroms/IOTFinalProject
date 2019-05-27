@@ -71,7 +71,7 @@ class ArduionsList extends Component {
         } else if (isNaN(arduinoId)) {
             this.setState({errorMsg: "Device id field must contain only numbers"})
         } else {
-            this.props.addNewDevice(this.props.token,
+            this.props.addNewDevice(this.props.token,this.props._id,
                 this.id.value, this.name.value);
             this.setState({formElement: e.target})
         }

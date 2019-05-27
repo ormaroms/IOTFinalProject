@@ -24,7 +24,7 @@ export function getStatusHistory(token, id) { // The id need to be here
 }
 
 
-export function addNewDevice(token, newDeviceId, newDeviceName, id) { // TODO: insert token
+export function addNewDevice(token, id, newDeviceId, newDeviceName) { // TODO: insert token
     debugger;
     return axios.post(SERVER + '/devices/' + id, {
         "id": newDeviceId,
