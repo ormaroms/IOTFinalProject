@@ -12,16 +12,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        register: (userName, password) => {
-            debugger;
-            register(userName, password).then(res => {
-                debugger;
+        register: (userName, password, name, email) => {
+            register(userName, password, name, email).then(res => {
                 console.log("User register succeeded")
                 dispatch(RegisterSuccceeded(res.data))
             }).catch(err => {
-                debugger;
                 console.error("User register failed")
-                console.error(err)
                 dispatch(RegisterFailed(err))
             })
         }

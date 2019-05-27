@@ -73,12 +73,13 @@ export function login(userName, password)
     })
 }
 
- export function register(userName, password)
+ export function register(userName, password, name, email)
  {
-     debugger;
      return axios.post(SERVER + '/users/register', {
          "username": userName,
-         "password": password
+         "password": password,
+         "name": name,
+         "email": email
      }, {
      headers: {
          'Content-Type': 'application/json'

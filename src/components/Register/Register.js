@@ -37,7 +37,7 @@ class Register extends Component {
             this.setState({errorMsg: "Email adress is not valid"})
         }
         else {
-            this.props.register(this.userName.value, this.password.value);
+            this.props.register(this.userName.value, this.password.value, this.name.value, this.email.value);
         }
     }
 
