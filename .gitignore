@@ -1,5 +1,6 @@
 # Logs
 logs
+.idea
 *.log
 npm-debug.log*
 
@@ -38,6 +39,8 @@ typings
 
 #idea
 .idea
+.idea/workspace.xml
+.DS_Store
 
 .node_repl_history
 
