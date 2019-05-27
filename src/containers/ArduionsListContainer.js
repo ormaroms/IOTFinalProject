@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import ArduionsList from '../components/ArduinosList/ArduionsList'
-import {arduionsListLoaded, deviceActionSucceeded, deviceAdditoinField} from '../actions/arduionsList'
+import {arduionsListLoaded, deviceActionSucceeded, deviceAdditoinField, updateAdruinoId} from '../actions/arduionsList'
 import {getUserDevices, addNewDevice, deleteDevice, updateDevice} from '../serverapi';
 
 
@@ -8,15 +8,16 @@ const mapStateToProps = state => {
     return {
         token: state.app.token,
         ...state.arduionsList,
+        ...state.login
     }
 }
 
 const mapDispatchToProps = dispatch => {
 
     return {
-        getUserDevices: (token) => {
+        getUserDevices: (token, id) => {
             console.log("token" + token)
-            getUserDevices(token).then(res => {
+            getUserDevices(token, id).then(res => {
                 console.log("User devices loaded")
 
                 debugger;
@@ -26,9 +27,12 @@ const mapDispatchToProps = dispatch => {
                 console.error(err)
             })
         },
-        addNewDevice: (token, newDeviceId, newDeviceName) => {
+        updateAdruinoId: (id) => {
+            updateAdruinoId(id)
+        },
+        addNewDevice: (token, id, newDeviceId, newDeviceName) => {
             debugger;
-            addNewDevice(token, newDeviceId, newDeviceName).then(res => {
+            addNewDevice(token, id, newDeviceId, newDeviceName).then(res => {
                 debugger;
                console.log("Device with id " + newDeviceId + " was added successfully.")
                 dispatch(deviceActionSucceeded(res.data));
@@ -39,8 +43,8 @@ const mapDispatchToProps = dispatch => {
                 dispatch(deviceAdditoinField(err.response.data.message));
             })
         },
-        deleteDevice: (token, deviceToDelete) => {
-            deleteDevice(token, deviceToDelete).then(res => {
+        deleteDevice: (token, id, deviceToDelete) => {
+            deleteDevice(token, id, deviceToDelete).then(res => {
                 console.log("Delete device with id " + deviceToDelete + " succeeded.")
                 dispatch(deviceActionSucceeded(res.data));
                 }

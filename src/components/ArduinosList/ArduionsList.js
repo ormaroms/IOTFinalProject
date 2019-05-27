@@ -25,7 +25,7 @@ import BarChart from '@material-ui/icons/BarChart';
 class ArduionsList extends Component {
 
     componentDidMount() {
-        this.props.getUserDevices(this.props.token);
+        this.props.getUserDevices(this.props.token, this.props._id);
     }
 
     constructor(props) {
@@ -50,8 +50,9 @@ class ArduionsList extends Component {
         }
     }
 
-    routeToCurrentStatus() { // redirect to Status
-    }
+    handleRouteToStatus = (arduinoId) => { // redirect to Status
+        this.props.updateAdruinoId(arduinoId);
+    };
 
     routeToStatusHistory() {
         history.push('statusHistory')
@@ -77,9 +78,8 @@ class ArduionsList extends Component {
     };
 
     handleDeleteRow = (deviceIdToDelete) => {
-        this.props.deleteDevice(this.props.token, deviceIdToDelete);
+        this.props.deleteDevice(this.props.token,this.props._id, deviceIdToDelete);
     };
-    
 
     render() {
         console.log(this.props);
@@ -117,7 +117,7 @@ class ArduionsList extends Component {
 
                                 {this.state.devices && this.state.devices.map((device, index) => {
                                     return (
-                                        <TableRow key={index}>
+                                        <TableRow key={index} hover >
                                             <TableCell component="th" scope="row">
                                                 {device.id}
                                             </TableCell>

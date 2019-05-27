@@ -7,7 +7,7 @@ export function getStatus(token, id) {
 }
 
 export function getUserDevices(token, id) { // The id need to be here
-    return axios.get(SERVER + '/devices/' + '5caba627e4b63200044dc316', {
+    return axios.get(SERVER + '/devices/' + id, {
         headers: {
             'authorization' : 'Bearer '+token,
             'Content-Type' : 'application/json'
@@ -24,9 +24,9 @@ export function getStatusHistory(token, id) { // The id need to be here
 }
 
 
-export function addNewDevice(token, newDeviceId, newDeviceName) { // TODO: insert token
+export function addNewDevice(token, newDeviceId, newDeviceName, id) { // TODO: insert token
     debugger;
-    return axios.post(SERVER + '/devices/' + '5caba627e4b63200044dc316', {
+    return axios.post(SERVER + '/devices/' + id, {
         "id": newDeviceId,
         "name": newDeviceName
     }, {
@@ -37,8 +37,8 @@ export function addNewDevice(token, newDeviceId, newDeviceName) { // TODO: inser
     })
 }
 
-export function deleteDevice(token, deviceToDelete) { // TODO: insert token
-    return axios.delete(SERVER + '/devices/' + '5caba627e4b63200044dc316',  {
+export function deleteDevice(token, id, deviceToDelete) { // TODO: insert token
+    return axios.delete(SERVER + '/devices/' + id,  {
         headers: {
             'authorization' : 'Bearer ' + token,
             'Content-Type': 'application/json'
