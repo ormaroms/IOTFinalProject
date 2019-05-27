@@ -79,6 +79,7 @@ class ArduionsList extends Component {
     handleDeleteRow = (deviceIdToDelete) => {
         this.props.deleteDevice(this.props.token, deviceIdToDelete);
     };
+    
 
     render() {
         console.log(this.props);
