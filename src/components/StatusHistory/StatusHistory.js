@@ -16,11 +16,27 @@ import Grid from "@material-ui/core/Grid";
 
 
 class statusHistory extends Component{
+    componentDidMount() {
+        this.props.getStatusHistory(this.props.token);
+    }
 
     constructor(props){
         super(props);
-        this.state = {expandedRows: []};
+        this.state = {expandedRows: [],
+            devicesHistory: []
+        };
     }
+
+    componentWillReceiveProps(nextProps) {
+        debugger;
+        if (nextProps.devicesHistory){
+            if (this.state.formElement) {
+                this.state.formElement.reset();
+            }
+            this.setState({ devicesHistory: nextProps.devicesHistory});
+        }
+    }
+
 
     handleExpand = (player) =>{
         debugger;
@@ -125,7 +141,7 @@ debugger;
 
     getPlayerTable = ()=>{
 
-        const playerRows = players.map((player)=>{
+        const playerRows = this.state.devicesHistory.map((player)=>{
             return this.getRows(player);
         });
 
