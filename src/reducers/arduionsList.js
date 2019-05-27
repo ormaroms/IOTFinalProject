@@ -12,7 +12,7 @@ export default function reduce(state = defaultState, action) {
         case "DEVICE_ADDITION_FIELD":
             return Object.assign({}, {errorMsg: action.error})
         case "UPDATE_ARDUINO_ID":
-            return Object.assign({}, action.data)
+            return Object.assign({}, {arduinoId: action.data})
         default: return state
     }
 }

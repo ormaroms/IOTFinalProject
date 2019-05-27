@@ -30,7 +30,6 @@ class ArduionsList extends Component {
 
     constructor(props) {
         super(props);
-        debugger;
         this.state = {
             errorMsg: "",
             devices: []
@@ -38,8 +37,6 @@ class ArduionsList extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        debugger;
-
         if (nextProps.errorMsg) {
             this.setState({errorMsg: nextProps.errorMsg});
         } else if (nextProps.devices) {
@@ -62,7 +59,6 @@ class ArduionsList extends Component {
     handleAddRow = (e) => {
         e.preventDefault();
 
-        debugger;
         let arduinoId = this.id.value;
         let arduinoName = this.name.value;
 

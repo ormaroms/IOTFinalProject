@@ -19,7 +19,7 @@ class CurrentStatus extends Component {
 
 
     componentDidMount() {
-        this.props.getStatus(this.props.token, this.props.arduinoId);
+        this.props.getStatus(this.props.token, this.props._id, this.props.arduinoId);
 
         var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         var months = ["January", "February", "March", "April", "May", "June",
@@ -33,12 +33,12 @@ class CurrentStatus extends Component {
         },1000)
 
         setInterval(() => {
-            this.props.getStatus(this.props.token, this.props.arduinoID)
+            this.props.getStatus(this.props.token, this.props._id, this.props.arduinoId);
         }, 10000)
     }
 
     render() {
-        const {lightStatus, gasStatus, arduinoID, classes} = this.props;
+        const {lightStatus, gasStatus, arduinoId, classes} = this.props;
 
         if (this.props.token === undefined || this.props.token === null || this.props.token === "") {
             history.push('/')
@@ -61,7 +61,7 @@ class CurrentStatus extends Component {
                     </AppBar>
 
                     <p className={classes.arduinoID}>
-                        <b> Arduino Id : </b> {arduinoID}
+                        <b> Arduino Id : </b> {arduinoId} {gasStatus} {lightStatus}
                     </p>
 
 
