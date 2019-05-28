@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => {
                 console.log("status history  loaded")
                 console.log(res.data)
 
-                function  filterByTrue() {
+                function  filterByGasAndLight() {
                     let filteredDevices = []
                     res.data.forEach(function (currentDevice) {
                         let currentHistory;
@@ -37,7 +37,7 @@ const mapDispatchToProps = dispatch => {
                     return filteredDevices;
                 }
 
-                const devicesHistory = {devicesHistory : filterByTrue()};
+                const devicesHistory = {devicesHistory : filterByGasAndLight()};
                 dispatch(statusDataFetched(devicesHistory))
             }).catch(err => {
                 console.error("status history loading failed")
