@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import styles from './StatusHistory.css.js'
-import { withStyles } from '@material-ui/core/styles';
+import styles from './StatusHistory.css'
+import {withStyles} from '@material-ui/core/styles';
 import {Table, TableBody, TableCell, TableHead, TableRow, Paper, Typography, TextField} from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import history from '../../history';
@@ -14,7 +14,7 @@ import Grid from "@material-ui/core/Grid";
 
 
 
-class statusHistory extends Component{
+class StatusHistory extends Component{
     componentDidMount() {
         this.props.getStatusHistory(this.props.token);
     }
@@ -147,7 +147,6 @@ debugger;
 
         return (
             <Table style={{tableLayout: 'fixed'}} className="my-table" >
-                    <TableHead>Device id</TableHead>
                 <TableBody>
                     {playerRows}
                 </TableBody>
@@ -156,24 +155,24 @@ debugger;
     }
 
     render(){
+        const {classes} = this.props;
         return (
             <Fragment>
 
-                <Paper  elevation={1}>
-                    <AppBar position="static" color="default">
-
+                <Paper className={classes.root} elevation={1}>
+                    <AppBar className={classes.header} position="static" color="default">
                         <Typography>
-                            Your Arduions history status:
+                            Your Arduions history
                         </Typography>
                     </AppBar>
-
-                    <div style={{ overflow: 'auto', height: '300px' }}>
+                    <div style={{overflow: 'auto', height: '300px'}}>
                     {this.getPlayerTable()}
-                        </div>
+                    </div>
+
                 </Paper>
             </Fragment>
         );
     }
 }
 
-export default statusHistory ;
+export default withStyles(styles)(StatusHistory) ;
