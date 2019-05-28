@@ -9,8 +9,9 @@ function jwt() {
     return expressJwt({ secret, isRevoked }).unless({
         path: [
             { url: /^\/status\/.*/, methods: ['GET', 'PUT', 'POST', 'DELETE'] },
+            { url: /^\/monitor\/.*/, methods: ['GET', 'PUT', 'POST', 'DELETE'] },
             '/users/authenticate',
-            '/users/register'
+            '/users/register',
         ]
     });
 }

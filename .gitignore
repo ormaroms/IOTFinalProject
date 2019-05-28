@@ -31,6 +31,8 @@ build
 node_modules
 jspm_packages
 typings
+build
+build/
 
 # Optional npm cache directory
 .npm
