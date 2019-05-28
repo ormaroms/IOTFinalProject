@@ -1,6 +1,5 @@
 
 export function RegisterSuccceeded(data) {
-    debugger;
     return { type: "REGISTER_SUCCEEDED" , data: data }
 }
 
