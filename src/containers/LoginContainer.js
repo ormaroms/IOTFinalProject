@@ -6,8 +6,9 @@ import history from '../history'
 
 
 const mapStateToProps = state => {
+
     return {
-        ...state
+        ...state.login
     }
 }
 
