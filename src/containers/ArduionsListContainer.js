@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import ArduionsList from '../components/ArduinosList/ArduionsList'
 import {arduionsListLoaded, deviceActionSucceeded, deviceAdditoinField, updateAdruinoId} from '../actions/arduionsList'
 import {getUserDevices, addNewDevice, deleteDevice, updateDevice} from '../serverapi';
+import history from '../history';
 
 
 const mapStateToProps = state => {
@@ -19,8 +20,6 @@ const mapDispatchToProps = dispatch => {
             console.log("token" + token)
             getUserDevices(token, id).then(res => {
                 console.log("User devices loaded")
-
-                debugger;
                 dispatch(arduionsListLoaded(res.data))
             }).catch(err => {
                 console.error("User devices load failed")
@@ -28,16 +27,14 @@ const mapDispatchToProps = dispatch => {
             })
         },
         updateAdruinoId: (id) => {
-            updateAdruinoId(id)
+            dispatch(updateAdruinoId(id));
+            history.push('/status')
         },
         addNewDevice: (token, id, newDeviceId, newDeviceName) => {
-            debugger;
             addNewDevice(token, id, newDeviceId, newDeviceName).then(res => {
-                debugger;
                console.log("Device with id " + newDeviceId + " was added successfully.")
                 dispatch(deviceActionSucceeded(res.data));
             }).catch(err => {
-                debugger;
                 console.log("Error in device addition with id " + newDeviceId);
                 console.log(err.response);
                 dispatch(deviceAdditoinField(err.response.data.message));
@@ -55,7 +52,6 @@ const mapDispatchToProps = dispatch => {
         },
         updateDevice: (token, deviceToUpdateId, deviceNewName) => {
             updateDevice(token, deviceToUpdateId, deviceNewName).then(res => {
-                debugger;
                 console.log("Device with id " + deviceToUpdateId + " was updated successfully.")
                 dispatch(deviceActionSucceeded(res.data));
             }).catch(err => {

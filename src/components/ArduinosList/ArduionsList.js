@@ -30,7 +30,6 @@ class ArduionsList extends Component {
 
     constructor(props) {
         super(props);
-        debugger;
         this.state = {
             errorMsg: "",
             devices: []
@@ -38,8 +37,6 @@ class ArduionsList extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        debugger;
-
         if (nextProps.errorMsg) {
             this.setState({errorMsg: nextProps.errorMsg});
         } else if (nextProps.devices) {
@@ -62,7 +59,6 @@ class ArduionsList extends Component {
     handleAddRow = (e) => {
         e.preventDefault();
 
-        debugger;
         let arduinoId = this.id.value;
         let arduinoName = this.name.value;
 
@@ -111,7 +107,7 @@ class ArduionsList extends Component {
 
                     </Table>
 
-                    <div style={{overflow: 'auto', height: '150px'}}>
+                    <div style={{overflow: 'auto', height: '100px'}}>
                         <Table style={{tableLayout: 'fixed'}}>
                             <TableBody className={classes.tableRows}>
 
@@ -130,7 +126,7 @@ class ArduionsList extends Component {
                             </TableBody>
                         </Table>
                     </div>
-
+                    <p className={classes.addDeviceTitle}>Add device</p>
                     <form onSubmit={this.handleAddRow}>
                         <Grid container spacing={24}>
                             <Grid item xs={5}>
@@ -150,9 +146,9 @@ class ArduionsList extends Component {
                                     style={{width: 100}}
                                 />
                             </Grid>
-                            <Grid item xs={2}>
+                            <Grid item xs={1}>
                                 <Button type="submit">
-                                    <AddCircle/>
+                                    <AddCircle className={classes.addButton}/>
                                 </Button>
                             </Grid>
                         </Grid>
