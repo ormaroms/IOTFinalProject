@@ -5,15 +5,10 @@ import {Button, TextField, FormControl, FormLabel, Paper, Typography} from '@mat
 import Chart from "react-google-charts";
 import AppBar from '@material-ui/core/AppBar';
 
-const data = [
-    ["Element", "Density", { role: "style" }],
-    ["Copper", 8.94, "#b87333"], // RGB value
-    ["Silver", 10.49, "silver"], // English color name
-    ["Gold", 19.3, "gold"],
-    ["Platinum", 21.45, "color: #e5e4e2"] // CSS-style declaration
-];
-// This is the current status component
-// Will get the isLit isGasLeaking arduinoID from the props! ( in the future, after the POC) *propTypes
+const options = {
+    hAxis: {title: "Days"},
+    vAxis: {title: "Times",viewWindow: {min:0, max:10}}
+}
 
 class StatisticsChart extends Component {
 
@@ -38,14 +33,14 @@ class StatisticsChart extends Component {
                             Statistics
                         </Typography>
                     </AppBar>
-
+                    <div>
+                        <Chart className= {classes.chart}
+                               chartType="ColumnChart"
+                               data={chartData}
+                               options={options}
+                        />
+                    </div>
                 </Paper>
-                <div>
-                    <Chart className= {classes.chart}
-                           chartType="ColumnChart"
-                           data={chartData}
-                    />
-                </div>
             </Fragment>
 
         );

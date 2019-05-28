@@ -4,7 +4,6 @@ import {StatisticsDataFetched} from '../actions/statisticsChart'
 import {getStatusHistory} from '../serverapi';
 import history from '../history';
 
-
 const mapStateToProps = state => {
     debugger;
     return {
