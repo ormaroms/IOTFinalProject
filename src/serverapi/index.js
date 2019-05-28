@@ -14,8 +14,9 @@ export function getUserDevices(token, id) { // The id need to be here
         }
     })
 }
-export function getStatusHistory(token, id) { // The id need to be here
-    return axios.get(SERVER + '/status/getArduinoHistory/' + '5ce0144b62e5ed00047b38d2', {
+export function getStatusHistory(token, id) {
+    debugger// The id need to be here
+    return axios.get(SERVER + '/status/getArduinoHistory/' + id, {
         headers: {
             'authorization' : 'Bearer '+token,
             'Content-Type' : 'application/json'
