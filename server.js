@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-// app.use(jwt());
+app.use(jwt());
 
 app.use(favicon(__dirname + '/client_build/favicon.ico'));
 // the __dirname is the current directory from where the script is running

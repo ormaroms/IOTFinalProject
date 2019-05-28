@@ -1,7 +1,0 @@
-{
-  "root": "client_build/",
-  "clean_urls": false,
-  "routes": {
-    "/monitor/**": "index.html"
-  }
-}
