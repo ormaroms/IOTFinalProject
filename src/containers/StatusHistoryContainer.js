@@ -20,16 +20,24 @@ const mapDispatchToProps = dispatch => {
             getStatusHistory(token,id).then(res => {
                 console.log("status history  loaded")
                 console.log(res.data)
-                debugger
 
-                const filteredDevices = res.data.forEach(currentDevice => currentDevice.history.filter(currentHistory => {
-                    if (currentHistory.gasStatus === true || currentHistory.lightStatus === true) {
-                        return currentHistory
-                    }
-                    else return []
-                }))
+                function  filterByTrue() {
+                    let filteredDevices = []
+                    res.data.forEach(function (currentDevice) {
+                        let currentHistory;
+                        currentHistory = currentDevice.history.filter(currentHistory => {
+                            if (currentHistory.gasStatus === true || currentHistory.lightStatus === true) {
+                                return currentHistory
+                            }
+                        });
+                        if (currentHistory.length > 0) {
+                            filteredDevices.push(currentDevice)
+                        }
+                    })
+                    return filteredDevices;
+                }
 
-                const devicesHistory = {devicesHistory : res.data};
+                const devicesHistory = {devicesHistory : filterByTrue()};
                 dispatch(statusDataFetched(devicesHistory))
             }).catch(err => {
                 console.error("status history loading failed")
