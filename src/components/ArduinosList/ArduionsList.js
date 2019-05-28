@@ -98,7 +98,8 @@ class ArduionsList extends Component {
                             Your Arduions
                         </Typography>
                     </AppBar>
-
+                    <DeleteIcon
+                    onClick={() => this.routeToStatistics()}/>
                     <Table className={classes.table}>
                         <TableHead>
                             <TableRow>

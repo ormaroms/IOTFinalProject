@@ -17,6 +17,10 @@ const styles = theme => ({
         fontSize: "35px",
         fontWeight: "bold",
         color: "whitesmoke"
+    },
+    chart: {
+        width: "100%",
+        height: "400px"
     }
 });
 export default styles;
