@@ -1,5 +1,6 @@
 {
   "name": "gas-monitor",
+  "homepage": " https://iot-gas-monitor.herokuapp.com/monitor/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
