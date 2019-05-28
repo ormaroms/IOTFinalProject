@@ -36,7 +36,6 @@ class Login extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        debugger;
         this.setState({errorMsg: nextProps.errorMsg})
     }
 

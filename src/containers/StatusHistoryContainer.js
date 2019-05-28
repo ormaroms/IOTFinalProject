@@ -18,8 +18,9 @@ const mapDispatchToProps = dispatch => {
             console.log("token" + token)
             getStatusHistory(token).then(res => {
                 console.log("status history  loaded")
-                window.alert(res.data)
-                dispatch(statusDataFetched(res.data))
+                console.log(res.data)
+                const devicesHistory = {devicesHistory : res.data};
+                dispatch(statusDataFetched(devicesHistory))
             }).catch(err => {
                 console.error("status history loading failed")
                 console.error(err)

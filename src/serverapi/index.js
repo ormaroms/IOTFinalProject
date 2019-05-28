@@ -7,7 +7,7 @@ export function getStatus(token, id) {
 }
 
 export function getUserDevices(token, id) { // The id need to be here
-    return axios.get(SERVER + '/devices/' + '5caba627e4b63200044dc316', {
+    return axios.get(SERVER + '/devices/' + id, {
         headers: {
             'authorization' : 'Bearer '+token,
             'Content-Type' : 'application/json'
@@ -15,7 +15,7 @@ export function getUserDevices(token, id) { // The id need to be here
     })
 }
 export function getStatusHistory(token, id) { // The id need to be here
-    return axios.get(SERVER + '/status/getArduinoHistory' + '5ce0144b62e5ed00047b38d2', {
+    return axios.get(SERVER + '/status/getArduinoHistory/' + '5ce0144b62e5ed00047b38d2', {
         headers: {
             'authorization' : 'Bearer '+token,
             'Content-Type' : 'application/json'
@@ -24,9 +24,8 @@ export function getStatusHistory(token, id) { // The id need to be here
 }
 
 
-export function addNewDevice(token, newDeviceId, newDeviceName) { // TODO: insert token
-    debugger;
-    return axios.post(SERVER + '/devices/' + '5caba627e4b63200044dc316', {
+export function addNewDevice(token, id, newDeviceId, newDeviceName) { // TODO: insert token
+    return axios.post(SERVER + '/devices/' + id, {
         "id": newDeviceId,
         "name": newDeviceName
     }, {
@@ -37,8 +36,8 @@ export function addNewDevice(token, newDeviceId, newDeviceName) { // TODO: inser
     })
 }
 
-export function deleteDevice(token, deviceToDelete) { // TODO: insert token
-    return axios.delete(SERVER + '/devices/' + '5caba627e4b63200044dc316',  {
+export function deleteDevice(token, id, deviceToDelete) { // TODO: insert token
+    return axios.delete(SERVER + '/devices/' + id,  {
         headers: {
             'authorization' : 'Bearer ' + token,
             'Content-Type': 'application/json'
@@ -73,12 +72,13 @@ export function login(userName, password)
     })
 }
 
- export function register(userName, password)
+ export function register(userName, password, name, email)
  {
-     debugger;
      return axios.post(SERVER + '/users/register', {
          "username": userName,
-         "password": password
+         "password": password,
+         "name": name,
+         "email": email
      }, {
      headers: {
          'Content-Type': 'application/json'

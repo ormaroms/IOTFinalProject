@@ -25,12 +25,11 @@ import BarChart from '@material-ui/icons/BarChart';
 class ArduionsList extends Component {
 
     componentDidMount() {
-        this.props.getUserDevices(this.props.token);
+        this.props.getUserDevices(this.props.token, this.props._id);
     }
 
     constructor(props) {
         super(props);
-        debugger;
         this.state = {
             errorMsg: "",
             devices: []
@@ -38,8 +37,6 @@ class ArduionsList extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        debugger;
-
         if (nextProps.errorMsg) {
             this.setState({errorMsg: nextProps.errorMsg});
         } else if (nextProps.devices) {
@@ -50,8 +47,9 @@ class ArduionsList extends Component {
         }
     }
 
-    routeToCurrentStatus() { // redirect to Status
-    }
+    handleRouteToStatus = (arduinoId) => { // redirect to Status
+        this.props.updateAdruinoId(arduinoId);
+    };
 
     routeToStatusHistory() {
         history.push('statusHistory')
@@ -61,7 +59,6 @@ class ArduionsList extends Component {
     handleAddRow = (e) => {
         e.preventDefault();
 
-        debugger;
         let arduinoId = this.id.value;
         let arduinoName = this.name.value;
 
@@ -70,14 +67,14 @@ class ArduionsList extends Component {
         } else if (isNaN(arduinoId)) {
             this.setState({errorMsg: "Device id field must contain only numbers"})
         } else {
-            this.props.addNewDevice(this.props.token,
+            this.props.addNewDevice(this.props.token,this.props._id,
                 this.id.value, this.name.value);
             this.setState({formElement: e.target})
         }
     };
 
     handleDeleteRow = (deviceIdToDelete) => {
-        this.props.deleteDevice(this.props.token, deviceIdToDelete);
+        this.props.deleteDevice(this.props.token,this.props._id, deviceIdToDelete);
     };
 
     render() {
@@ -110,13 +107,13 @@ class ArduionsList extends Component {
 
                     </Table>
 
-                    <div style={{overflow: 'auto', height: '150px'}}>
+                    <div style={{overflow: 'auto', height: '100px'}}>
                         <Table style={{tableLayout: 'fixed'}}>
                             <TableBody className={classes.tableRows}>
 
                                 {this.state.devices && this.state.devices.map((device, index) => {
                                     return (
-                                        <TableRow key={index}>
+                                        <TableRow key={index} hover onClick={() => this.handleRouteToStatus(device.id)}>
                                             <TableCell component="th" scope="row">
                                                 {device.id}
                                             </TableCell>
@@ -129,7 +126,7 @@ class ArduionsList extends Component {
                             </TableBody>
                         </Table>
                     </div>
-
+                    <p className={classes.addDeviceTitle}>Add device</p>
                     <form onSubmit={this.handleAddRow}>
                         <Grid container spacing={24}>
                             <Grid item xs={5}>
@@ -149,9 +146,9 @@ class ArduionsList extends Component {
                                     style={{width: 100}}
                                 />
                             </Grid>
-                            <Grid item xs={2}>
+                            <Grid item xs={1}>
                                 <Button type="submit">
-                                    <AddCircle/>
+                                    <AddCircle className={classes.addButton}/>
                                 </Button>
                             </Grid>
                         </Grid>

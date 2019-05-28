@@ -28,18 +28,28 @@ const styles = theme => ({
         cursor: "pointer"
     },
     addButton: {
-        color: "black",
-        cursor: "pointer"
+        color: "cornflowerblue",
+        cursor: "pointer",
+        marginRight: "80px"
     },
     tableRows: {
-        height: '200px',
-        maxHeight: '200px',
+        height: '100px',
+        maxHeight: '100px',
         overflowY: 'scroll'
     },
     error: {
         color: "red",
         fontSize: "18px",
         margin: "5px"
+    },
+    addDeviceTitle: {
+        fontSize: "18px",
+        color: "darkslategray",
+        float: "left",
+        marginLeft: "20px",
+        marginBottom: "0px",
+        fontFamily: "Montserrat"
+
     }
 });
 export default styles;

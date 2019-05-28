@@ -2,26 +2,24 @@ import { connect } from 'react-redux'
 import Register from '../components/Register/Register'
 import {register} from "../serverapi";
 import {RegisterSuccceeded, RegisterFailed} from "../actions/register";
+import history from '../history'
 
 
 const mapStateToProps = state => {
     return {
-        ...state
+        ...state.register
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        register: (userName, password) => {
-            debugger;
-            register(userName, password).then(res => {
-                debugger;
+        register: (userName, password, name, email) => {
+            register(userName, password, name, email).then(res => {
                 console.log("User register succeeded")
                 dispatch(RegisterSuccceeded(res.data))
+                history.push('/');
             }).catch(err => {
-                debugger;
                 console.error("User register failed")
-                console.error(err)
                 dispatch(RegisterFailed(err))
             })
         }
