@@ -35,9 +35,9 @@ class App extends Component {
                         <Router history={history}>
                             <Route path="/" exact component={LoginContainer} />
                             <Route path="/register" component={RegisterContainer} />
-                            <Route path="/status" component={StatusContainer} />
-                            <Route path="/arduionsList" component={ArduionsListContainer} />
-                            <Route path="/statusHistory" component={statusHistory} />
+                            <Route path="/device_status" component={StatusContainer} />
+                            <Route path="/device_list" component={ArduionsListContainer} />
+                            <Route path="/status_history" component={statusHistory} />
                         </Router>
                     </header>
                 </div>
