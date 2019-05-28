@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => {
             login(userName, password).then(res => {
                 console.log("User login succeeded")
                 dispatch(LoginSuccceeded(res.data))
-                history.push('/arduionsList')
+                history.push('/device_list')
             }).catch(err => {
                 console.error("User login failed")
                 console.error(err)

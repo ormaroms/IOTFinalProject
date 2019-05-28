@@ -52,7 +52,7 @@ class ArduionsList extends Component {
     };
 
     routeToStatusHistory() {
-        history.push('statusHistory')
+        history.push('status_history')
     }
 
 

@@ -28,7 +28,7 @@ const mapDispatchToProps = dispatch => {
         },
         updateAdruinoId: (id) => {
             dispatch(updateAdruinoId(id));
-            history.push('/status')
+            history.push('/device_status')
         },
         addNewDevice: (token, id, newDeviceId, newDeviceName) => {
             addNewDevice(token, id, newDeviceId, newDeviceName).then(res => {
