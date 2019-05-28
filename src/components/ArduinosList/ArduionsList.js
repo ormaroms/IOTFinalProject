@@ -18,6 +18,7 @@ import history from '../../history';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircle from '@material-ui/icons/Add';
 import BarChart from '@material-ui/icons/BarChart';
+import Timelapse from '@material-ui/icons/Timelapse';
 
 // This is the current status component
 // Will get the isLit isGasLeaking arduinoID from the props! ( in the future, after the POC) *propTypes
@@ -88,18 +89,14 @@ class ArduionsList extends Component {
             <Fragment>
                 <Paper className={classes.root} elevation={1}>
                     <AppBar className={classes.header} position="static" color="default">
-                        <BarChart onClick={this.routeToStatusHistory}/>
-                        {/*<p className={classes.text}>*/}
-                        {/*    Dont have an account yet? <a href className={classes.signUp} onClick={this.routeToStatusHistory}> Sign up </a>*/}
-                        {/*</p>*/}
-
-
                         <Typography className={classes.title}>
-                            Your Arduions
+                            Your Devices
                         </Typography>
+                        <div>
+                            <Timelapse onClick={this.routeToStatusHistory} style={{float: 'right'}}/>
+                            <BarChart onClick={this.routeToStatistics} style={{float: 'right'}}/>
+                        </div>
                     </AppBar>
-                    <DeleteIcon
-                    onClick={() => this.routeToStatistics()}/>
                     <Table className={classes.table}>
                         <TableHead>
                             <TableRow>
@@ -117,11 +114,11 @@ class ArduionsList extends Component {
 
                                 {this.state.devices && this.state.devices.map((device, index) => {
                                     return (
-                                        <TableRow key={index} hover onClick={() => this.handleRouteToStatus(device.id)}>
-                                            <TableCell component="th" scope="row">
+                                        <TableRow key={index} hover >
+                                            <TableCell component="th" scope="row" onClick={() => this.handleRouteToStatus(device.id)}>
                                                 {device.id}
                                             </TableCell>
-                                            <TableCell>{device.name}</TableCell>
+                                            <TableCell onClick={() => this.handleRouteToStatus(device.id)}>{device.name}</TableCell>
                                             <TableCell><DeleteIcon
                                                 onClick={() => this.handleDeleteRow(device.id)}/></TableCell>
                                         </TableRow>
