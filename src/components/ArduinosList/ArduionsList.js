@@ -54,7 +54,9 @@ class ArduionsList extends Component {
     routeToStatusHistory() {
         history.push('status_history')
     }
-
+    routeToStatistics() {
+        history.push('statistics_chart')
+    }
 
     handleAddRow = (e) => {
         e.preventDefault();

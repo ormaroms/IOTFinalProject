@@ -4,6 +4,7 @@ import app from './app'
 import login from './login'
 import arduionsList from './arduionsList'
 import statusHistory from './statusHistory'
+import statisticsChart from './statisticsChart'
 
 
-export default combineReducers({status,arduionsList, app, login,statusHistory})
+export default combineReducers({status,arduionsList, app, login,statusHistory, statisticsChart})
