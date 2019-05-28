@@ -58,6 +58,7 @@ class ArduionsList extends Component {
 
     handleAddRow = (e) => {
         e.preventDefault();
+        
 
         let arduinoId = this.id.value;
         let arduinoName = this.name.value;
