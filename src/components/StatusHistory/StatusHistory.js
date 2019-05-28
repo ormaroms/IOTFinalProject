@@ -38,21 +38,21 @@ class StatusHistory extends Component{
     }
 
 
-    handleExpand = (player) =>{
+    handleExpand = (statusHistory) =>{
         debugger;
         let newExpandedRows = [...this.state.expandedRows];
         let allExpanded = this.state.allExpanded;
         let idxFound = newExpandedRows.findIndex((id)=>{
-            return id === player.id;
+            return id === statusHistory.id;
         });
 
         if(idxFound > -1){
-            console.log("Collapsing " + player.id + " " + idxFound);
+            console.log("Collapsing " + statusHistory.id + " " + idxFound);
             newExpandedRows.splice(idxFound, 1);
         }
         else{
-            console.log("Expanding " + player.id);
-            newExpandedRows.push(player.id);
+            console.log("Expanding " + statusHistory.id);
+            newExpandedRows.push(statusHistory.id);
         }
 
         console.log("Expanded rows");
@@ -61,28 +61,28 @@ class StatusHistory extends Component{
         this.setState({expandedRows: [...newExpandedRows]});
     }
 
-    isExpanded = (player)=>{
+    isExpanded = (statusHistory)=>{
         const idx = this.state.expandedRows.find(
             (id)=>{
-                return id === player.id;
+                return id === statusHistory.id;
             }
         );
 
         return idx > -1;
     }
 
-    expandAll=(players)=>{
+    expandAll=(devices)=>{
         console.log("ExapndedRows: " + this.state.expandedRows.length);
-        console.log("Players:      " + players.length);
-        if(this.state.expandedRows.length === players.length){
+        console.log("devices:      " + devices.length);
+        if(this.state.expandedRows.length === devices.length){
 
             let newExpandedRows = [];
             this.setState({expandedRows: [...newExpandedRows]});
             console.log("Collapsing all...");
         }
         else{
-            let newExpandedRows = players.map(
-                player => player.history.arduinoId
+            let newExpandedRows = devices.map(
+                statusHistory => statusHistory.history.arduinoId
             );
             this.setState({expandedRows: [...newExpandedRows]});
             console.log("Expanding all...");
@@ -90,28 +90,28 @@ class StatusHistory extends Component{
         }
     }
 
-    getRows = (player)=>{
+    getRows = (deviceHistory)=>{
 
         let rows = [];
 
         const firstRow = (
-            <TableRow onClick={()=>this.handleExpand(player)}>
+            <TableRow onClick={()=>this.handleExpand(deviceHistory)}>
                 <TableCell >
                     <Button>
-                        {this.isExpanded(player) ? "-" : "+"}
+                        {this.isExpanded(deviceHistory) ? "-" : "+"}
                     </Button>
                 </TableCell>
-                <TableCell>{player.id}</TableCell>
+                <TableCell>{deviceHistory.id}</TableCell>
             </TableRow>
         )
 
         rows.push(firstRow);
 debugger;
-        if(this.isExpanded(player)){
+        if(this.isExpanded(deviceHistory)){
             const detailRow = (
-                player.history.map( (history) => {
-                       return( <TableRow className="player-details">
-                            <TableCell colSpan="4" className="player-details">
+                deviceHistory.history.map( (history) => {
+                       return( <TableRow >
+                            <TableCell colSpan="4" >
                                 <br/>
                                 <br/>
                                 <div className="attribute">
@@ -139,16 +139,16 @@ debugger;
         return rows;
     }
 
-    getPlayerTable = ()=>{
+    getTable = ()=>{
         debugger
-        const playerRows = this.state.devicesHistory.map((player)=>{
-            return this.getRows(player);
+        const devicesRow = this.state.devicesHistory.map((device)=>{
+            return this.getRows(device);
         });
 
         return (
             <Table style={{tableLayout: 'fixed'}} className="my-table" >
                 <TableBody>
-                    {playerRows}
+                    {devicesRow}
                 </TableBody>
             </Table>
         );
@@ -166,7 +166,7 @@ debugger;
                         </Typography>
                     </AppBar>
                     <div style={{overflow: 'auto', height: '300px'}}>
-                    {this.getPlayerTable()}
+                    {this.getTable()}
                     </div>
 
                 </Paper>
