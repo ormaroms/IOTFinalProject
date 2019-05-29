@@ -18,13 +18,15 @@ app.use(favicon(__dirname + '/client_build/favicon.ico'));
 // the __dirname is the current directory from where the script is running
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'client_build')));
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'client_build', 'index.html'));
-});
 
 app.use('/users', require('./users/users.controller'));
 app.use('/status', require('./status/status.controller'));
 app.use('/devices', require('./device/device.controller'));
+
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'client_build', 'index.html'));
+});
+
 
 app.use(errorHandler);
 
