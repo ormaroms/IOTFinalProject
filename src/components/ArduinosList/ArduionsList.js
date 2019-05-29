@@ -116,7 +116,7 @@ class ArduionsList extends Component {
 
                     </Table>
 
-                    <div style={{overflow: 'auto', height: '100px'}}>
+                    <div style={{overflow: 'auto', maxHeight: '100px'}}>
                         <Table style={{tableLayout: 'fixed'}}>
                             <TableBody className={classes.tableRows}>
 
@@ -155,7 +155,7 @@ class ArduionsList extends Component {
                                     style={{width: 100}}
                                 />
                             </Grid>
-                            <Grid item xs={1}>
+                            <Grid item xs={1} >
                                 <Button type="submit">
                                     <AddCircle className={classes.addButton}/>
                                 </Button>

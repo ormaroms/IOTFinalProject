@@ -4,7 +4,7 @@ const styles = theme => ({
         // paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
         height: '370px',
-        width: '400px',
+        width: '85% ',
         paddingRight: '0px !important',
         paddingLeft: '0px !important'
     },
