@@ -19,6 +19,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircle from '@material-ui/icons/Add';
 import BarChart from '@material-ui/icons/BarChart';
 import Timelapse from '@material-ui/icons/Timelapse';
+import LogoutIcon from '@material-ui/icons/ExitToApp';
 
 // This is the current status component
 // Will get the isLit isGasLeaking arduinoID from the props! ( in the future, after the POC) *propTypes
@@ -26,7 +27,7 @@ import Timelapse from '@material-ui/icons/Timelapse';
 class ArduionsList extends Component {
 
     componentDidMount() {
-        this.props.getUserDevices(this.props.token, this.props._id);
+        this.props.getUserDevices(this.props.token, this.props.user_id);
     }
 
     constructor(props) {
@@ -49,6 +50,7 @@ class ArduionsList extends Component {
     }
 
     handleRouteToStatus = (arduinoId) => { // redirect to Status
+        this.props.resetStatus()
         this.props.updateAdruinoId(arduinoId);
     };
 
@@ -57,6 +59,11 @@ class ArduionsList extends Component {
     }
     routeToStatistics() {
         history.push('statistics_chart')
+    }
+
+    logout() {
+        this.props.logout()
+        history.push('')
     }
 
     handleAddRow = (e) => {
@@ -71,14 +78,14 @@ class ArduionsList extends Component {
         } else if (isNaN(arduinoId)) {
             this.setState({errorMsg: "Device id field must contain only numbers"})
         } else {
-            this.props.addNewDevice(this.props.token,this.props._id,
+            this.props.addNewDevice(this.props.token,this.props.user_id,
                 this.id.value, this.name.value);
             this.setState({formElement: e.target})
         }
     };
 
     handleDeleteRow = (deviceIdToDelete) => {
-        this.props.deleteDevice(this.props.token,this.props._id, deviceIdToDelete);
+        this.props.deleteDevice(this.props.token,this.props.user_id, deviceIdToDelete);
     };
 
     render() {
@@ -95,6 +102,7 @@ class ArduionsList extends Component {
                         <div>
                             <Timelapse onClick={this.routeToStatusHistory} style={{float: 'right'}}/>
                             <BarChart onClick={this.routeToStatistics} style={{float: 'right'}}/>
+                            <LogoutIcon onClick={this.logout.bind(this)} style={{float: 'right'}}/>
                         </div>
                     </AppBar>
                     <Table className={classes.table}>
@@ -112,9 +120,9 @@ class ArduionsList extends Component {
                         <Table style={{tableLayout: 'fixed'}}>
                             <TableBody className={classes.tableRows}>
 
-                                {this.state.devices && this.state.devices.map((device, index) => {
+                                {this.state.devices && this.state.devices.map((device) => {
                                     return (
-                                        <TableRow key={index} hover >
+                                        <TableRow key={device.id} hover >
                                             <TableCell component="th" scope="row" onClick={() => this.handleRouteToStatus(device.id)}>
                                                 {device.id}
                                             </TableCell>

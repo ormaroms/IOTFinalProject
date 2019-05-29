@@ -8,6 +8,7 @@ const mapStateToProps = state => {
     debugger;
     return {
         token: state.app.token,
+        user_id: state.app.user_id,
         ...state.arduionsList,
         ...state.login,
         ...state.statisticsChart

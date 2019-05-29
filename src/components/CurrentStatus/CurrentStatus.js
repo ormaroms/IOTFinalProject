@@ -19,7 +19,7 @@ class CurrentStatus extends Component {
 
 
     componentDidMount() {
-        this.props.getStatus(this.props.token, this.props._id, this.props.arduinoId);
+        this.props.getStatus(this.props.token, this.props.user_id, this.props.arduinoId);
 
         var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         var months = ["January", "February", "March", "April", "May", "June",
@@ -33,7 +33,7 @@ class CurrentStatus extends Component {
         },1000)
 
         setInterval(() => {
-            this.props.getStatus(this.props.token, this.props._id, this.props.arduinoId);
+            this.props.getStatus(this.props.token, this.props.user_id, this.props.arduinoId);
         }, 10000)
     }
 
@@ -47,7 +47,7 @@ class CurrentStatus extends Component {
         
         return (
             
-            <Fragment>
+            <Fragment key={this.props.arduinoId}>
                 <Paper className={classes.root} elevation={1}>
                     <AppBar className={classes.header} position="static" color="default">
 
@@ -73,8 +73,7 @@ class CurrentStatus extends Component {
                             <FormControlLabel
                                 control={
                                     <Switch
-                                        checked={gasStatus}
-
+                                        checked={gasStatus || false}
                                         value="Leaking"
                                     />
                                 }
@@ -84,8 +83,7 @@ class CurrentStatus extends Component {
                             <FormControlLabel
                                 control={
                                     <Switch
-                                        checked={lightStatus}
-
+                                        checked={lightStatus || false}
                                         value="Lit"
                                     />
                                 }

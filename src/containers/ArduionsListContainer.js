@@ -1,13 +1,16 @@
 import { connect } from 'react-redux'
 import ArduionsList from '../components/ArduinosList/ArduionsList'
 import {arduionsListLoaded, deviceActionSucceeded, deviceAdditoinField, updateAdruinoId} from '../actions/arduionsList'
+import {resetStatus} from '../actions/status'
 import {getUserDevices, addNewDevice, deleteDevice, updateDevice} from '../serverapi';
+import {Logout} from '../actions/login'
 import history from '../history';
 
 
 const mapStateToProps = state => {
     return {
         token: state.app.token,
+        user_id: state.app.user_id,
         ...state.arduionsList,
         ...state.login
     }
@@ -16,6 +19,15 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 
     return {
+        logout: () => {
+            console.log("Logged out")
+            dispatch(Logout())
+        },
+
+        resetStatus: () => {
+            dispatch(resetStatus())
+        },
+
         getUserDevices: (token, id) => {
             console.log("token" + token)
             getUserDevices(token, id).then(res => {
@@ -28,7 +40,7 @@ const mapDispatchToProps = dispatch => {
         },
         updateAdruinoId: (id) => {
             dispatch(updateAdruinoId(id));
-            history.push('/device_status')
+            history.push('/device_status/' + id)
         },
         addNewDevice: (token, id, newDeviceId, newDeviceName) => {
             addNewDevice(token, id, newDeviceId, newDeviceName).then(res => {

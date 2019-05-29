@@ -17,7 +17,8 @@ import history from './history'
 
 const store = createStore(reducers)
 store.subscribe(() => {
-    localStorage.setItem('TOKEN', store.getState().token)
+    localStorage.setItem('TOKEN', store.getState().app.token)
+    localStorage.setItem('USER_ID', store.getState().app.user_id)
 })
 
 const theme = createMuiTheme({
@@ -36,7 +37,7 @@ class App extends Component {
                         <Router history={history}>
                             <Route path="/" exact component={LoginContainer} />
                             <Route path="/register" component={RegisterContainer} />
-                            <Route path="/device_status" component={StatusContainer} />
+                            <Route path="/device_status/:id" component={StatusContainer} />
                             <Route path="/device_list" component={ArduionsListContainer} />
                             <Route path="/status_history" component={statusHistory} />
                             <Route path="/statistics_chart" component={StatisticsChartContainer} />

@@ -16,7 +16,7 @@ import Grid from "@material-ui/core/Grid";
 
 class StatusHistory extends Component{
     componentDidMount() {
-        this.props.getStatusHistory(this.props.token,this.props._id);
+        this.props.getStatusHistory(this.props.token,this.props.user_id);
     }
 
     constructor(props){
