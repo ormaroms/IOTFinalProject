@@ -6,6 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Info from '@material-ui/icons/Info';
 import Grid from '@material-ui/core/Grid';
 import history from '../../history'
+import Button from "@material-ui/core/es/Button/Button";
 
 // This is the current status component
 // Will get the isLit isGasLeaking arduinoID from the props! ( in the future, after the POC) *propTypes
@@ -94,7 +95,17 @@ class CurrentStatus extends Component {
 
                         </FormGroup>
                     </FormControl>
-
+                    {
+                        (!lightStatus && gasStatus) && (
+                        <div>
+                        <Button style={{color: 'red'}}>
+                            <a href="tel:102" style={{color: 'red', textDecoration: 'none'}}>
+                            Call Fire department!
+                            </a>
+                        </Button>
+                        </div>
+                        )
+                    }
                 </Paper>
             </Fragment>
 
