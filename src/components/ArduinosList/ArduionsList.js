@@ -50,6 +50,7 @@ class ArduionsList extends Component {
     }
 
     handleRouteToStatus = (arduinoId) => { // redirect to Status
+        this.props.resetStatus()
         this.props.updateAdruinoId(arduinoId);
     };
 

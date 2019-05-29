@@ -73,8 +73,7 @@ class CurrentStatus extends Component {
                             <FormControlLabel
                                 control={
                                     <Switch
-                                        checked={gasStatus}
-
+                                        checked={gasStatus || false}
                                         value="Leaking"
                                     />
                                 }
@@ -84,8 +83,7 @@ class CurrentStatus extends Component {
                             <FormControlLabel
                                 control={
                                     <Switch
-                                        checked={lightStatus}
-
+                                        checked={lightStatus || false}
                                         value="Lit"
                                     />
                                 }
