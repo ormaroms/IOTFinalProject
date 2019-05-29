@@ -18,6 +18,7 @@ import history from './history'
 const store = createStore(reducers)
 store.subscribe(() => {
     localStorage.setItem('TOKEN', store.getState().app.token)
+    localStorage.setItem('USER_ID', store.getState().app.user_id)
 })
 
 const theme = createMuiTheme({

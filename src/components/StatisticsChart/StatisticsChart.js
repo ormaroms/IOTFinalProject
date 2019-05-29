@@ -13,7 +13,7 @@ const options = {
 class StatisticsChart extends Component {
 
     componentDidMount() {
-        this.props.getStatistics(this.props.token, this.props._id);
+        this.props.getStatistics(this.props.token, this.props.user_id);
     }
 
     constructor(props) {

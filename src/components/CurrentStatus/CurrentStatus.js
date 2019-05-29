@@ -19,7 +19,7 @@ class CurrentStatus extends Component {
 
 
     componentDidMount() {
-        this.props.getStatus(this.props.token, this.props._id, this.props.arduinoId);
+        this.props.getStatus(this.props.token, this.props.user_id, this.props.arduinoId);
 
         var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         var months = ["January", "February", "March", "April", "May", "June",
@@ -33,7 +33,7 @@ class CurrentStatus extends Component {
         },1000)
 
         setInterval(() => {
-            this.props.getStatus(this.props.token, this.props._id, this.props.arduinoId);
+            this.props.getStatus(this.props.token, this.props.user_id, this.props.arduinoId);
         }, 10000)
     }
 

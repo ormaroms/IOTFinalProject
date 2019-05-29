@@ -7,6 +7,7 @@ import {getStatusHistory} from '../serverapi';
 const mapStateToProps = state => {
     return {
         token: state.app.token,
+        user_id: state.app.user_id,
         ...state.statusHistory,
         ...state.login
     }
