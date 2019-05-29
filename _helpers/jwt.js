@@ -11,7 +11,7 @@ function jwt() {
             { url: /^\/status\/.*/, methods: ['GET', 'PUT', 'POST', 'DELETE'] },
             { url: /^\/static\/.*/, methods: ['GET'] },
             { url: '/', methods: ['GET'] },
-            { url: '/device_status', methods: ['GET'] },
+            { url: /^\/device_status\/.*/, methods: ['GET'] },
             { url: '/register', methods: ['GET'] },
             { url: '/device_list', methods: ['GET'] },
             { url: '/status_history', methods: ['GET'] },
