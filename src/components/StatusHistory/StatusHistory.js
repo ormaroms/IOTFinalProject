@@ -162,7 +162,7 @@ debugger;
                 <Paper className={classes.root} elevation={1}>
                     <AppBar className={classes.header} position="static" color="default">
                         <Typography>
-                            Your Arduions history
+                            Your devices history
                         </Typography>
                     </AppBar>
                     <div style={{overflow: 'auto', height: '300px'}}>

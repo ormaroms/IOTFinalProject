@@ -61,7 +61,7 @@ class CurrentStatus extends Component {
                     </AppBar>
 
                     <p className={classes.arduinoID}>
-                        <b> Arduino Id : </b> {arduinoId} {gasStatus} {lightStatus}
+                        <b> Device Id: </b> {arduinoId} {gasStatus} {lightStatus}
                     </p>
 
 

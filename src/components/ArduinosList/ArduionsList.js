@@ -119,8 +119,8 @@ class ArduionsList extends Component {
                     <Table className={classes.table}>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Arduino Id</TableCell>
-                                <TableCell>Name</TableCell>
+                                <TableCell>Device Id</TableCell>
+                                <TableCell>Description</TableCell>
                                 <TableCell></TableCell>
                             </TableRow>
                         </TableHead>
@@ -158,7 +158,7 @@ class ArduionsList extends Component {
 
                                 <TextField
                                     id="id"
-                                    placeholder="Arduino Id"
+                                    placeholder="Device Id"
                                     inputRef={el => this.id = el}
                                     autoFocus
                                     margin="dense"
