@@ -4,9 +4,10 @@ import {statusDataFetched} from '../actions/status'
 import {getStatus} from '../serverapi/'
 
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
     return {
         token: state.app.token,
+        arduinoId: ownProps.match.params.id,
         ...state.status,
         ...state.login,
         ...state.arduionsList
