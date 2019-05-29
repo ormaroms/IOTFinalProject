@@ -2,24 +2,28 @@ import React, {Component, Fragment} from 'react';
 import styles from './ArduionsList.css'
 import {withStyles} from '@material-ui/core/styles';
 import {
+    Button,
+    Paper,
     Table,
     TableBody,
     TableCell,
     TableHead,
     TableRow,
-    Paper,
-    Typography,
     TextField,
-    Button
+    Typography
 } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
 import history from '../../history';
 import DeleteIcon from '@material-ui/icons/Delete';
-import AddCircle from '@material-ui/icons/Add';
 import BarChart from '@material-ui/icons/BarChart';
 import Timelapse from '@material-ui/icons/Timelapse';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
+import AddIcon from '@material-ui/icons/Add';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 // This is the current status component
 // Will get the isLit isGasLeaking arduinoID from the props! ( in the future, after the POC) *propTypes
@@ -34,7 +38,8 @@ class ArduionsList extends Component {
         super(props);
         this.state = {
             errorMsg: "",
-            devices: []
+            devices: [],
+            isDialogOpen: false
         };
     }
 
@@ -57,6 +62,7 @@ class ArduionsList extends Component {
     routeToStatusHistory() {
         history.push('status_history')
     }
+
     routeToStatistics() {
         history.push('statistics_chart')
     }
@@ -66,9 +72,13 @@ class ArduionsList extends Component {
         history.push('')
     }
 
+    handleCloseDialog() {
+        this.setState({isDialogOpen: false})
+    }
+
     handleAddRow = (e) => {
         e.preventDefault();
-        
+
 
         let arduinoId = this.id.value;
         let arduinoName = this.name.value;
@@ -78,14 +88,14 @@ class ArduionsList extends Component {
         } else if (isNaN(arduinoId)) {
             this.setState({errorMsg: "Device id field must contain only numbers"})
         } else {
-            this.props.addNewDevice(this.props.token,this.props.user_id,
+            this.props.addNewDevice(this.props.token, this.props.user_id,
                 this.id.value, this.name.value);
             this.setState({formElement: e.target})
         }
     };
 
     handleDeleteRow = (deviceIdToDelete) => {
-        this.props.deleteDevice(this.props.token,this.props.user_id, deviceIdToDelete);
+        this.props.deleteDevice(this.props.token, this.props.user_id, deviceIdToDelete);
     };
 
     render() {
@@ -100,9 +110,10 @@ class ArduionsList extends Component {
                             Your Devices
                         </Typography>
                         <div>
-                            <Timelapse onClick={this.routeToStatusHistory} style={{float: 'right'}}/>
-                            <BarChart onClick={this.routeToStatistics} style={{float: 'right'}}/>
-                            <LogoutIcon onClick={this.logout.bind(this)} style={{float: 'right'}}/>
+                            <LogoutIcon onClick={this.logout.bind(this)} style={{float: 'right' , fontSize: 35}}/>
+                            <Timelapse onClick={this.routeToStatusHistory} style={{float: 'left', fontSize: 35}}/>
+                            <BarChart onClick={this.routeToStatistics} style={{float: 'left', fontSize: 35}}/>
+                            <AddIcon onClick={() => this.setState({isDialogOpen: true})} style={{float: 'left', fontSize: 35}}/>
                         </div>
                     </AppBar>
                     <Table className={classes.table}>
@@ -116,17 +127,19 @@ class ArduionsList extends Component {
 
                     </Table>
 
-                    <div style={{overflow: 'auto', maxHeight: '100px'}}>
+                    <div style={{overflow: 'auto', maxHeight: '300px'}}>
                         <Table style={{tableLayout: 'fixed'}}>
                             <TableBody className={classes.tableRows}>
 
                                 {this.state.devices && this.state.devices.map((device) => {
                                     return (
-                                        <TableRow key={device.id} hover >
-                                            <TableCell component="th" scope="row" onClick={() => this.handleRouteToStatus(device.id)}>
+                                        <TableRow key={device.id} hover>
+                                            <TableCell component="th" scope="row"
+                                                       onClick={() => this.handleRouteToStatus(device.id)}>
                                                 {device.id}
                                             </TableCell>
-                                            <TableCell onClick={() => this.handleRouteToStatus(device.id)}>{device.name}</TableCell>
+                                            <TableCell
+                                                onClick={() => this.handleRouteToStatus(device.id)}>{device.name}</TableCell>
                                             <TableCell><DeleteIcon
                                                 onClick={() => this.handleDeleteRow(device.id)}/></TableCell>
                                         </TableRow>
@@ -135,36 +148,42 @@ class ArduionsList extends Component {
                             </TableBody>
                         </Table>
                     </div>
-                    <p className={classes.addDeviceTitle}>Add device</p>
-                    <form onSubmit={this.handleAddRow}>
-                        <Grid container spacing={24}>
-                            <Grid item xs={5}>
+                    <Dialog open={this.state.isDialogOpen} onClose={this.handleCloseDialog.bind(this)} aria-labelledby="form-dialog-title">
+                        <form onSubmit={this.handleAddRow}>
+                            <DialogTitle id="form-dialog-title">Add a new device</DialogTitle>
+                            <DialogContent>
+                                <DialogContentText>
+                                    Add a new gas monitor device.
+                                </DialogContentText>
+
                                 <TextField
                                     id="id"
-                                    // type="number"
                                     placeholder="Arduino Id"
                                     inputRef={el => this.id = el}
-                                    style={{width: 95}}
+                                    autoFocus
+                                    margin="dense"
+                                    fullWidth
                                 />
-                            </Grid>
-                            <Grid item xs={5}>
                                 <TextField
                                     id="name"
                                     placeholder="Name"
                                     inputRef={el => this.name = el}
-                                    style={{width: 100}}
+                                    margin="dense"
+                                    fullWidth
                                 />
-                            </Grid>
-                            <Grid item xs={1} >
-                                <Button type="submit">
-                                    <AddCircle className={classes.addButton}/>
+
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={this.handleCloseDialog.bind(this)} color="primary" >
+                                    Close
                                 </Button>
-                            </Grid>
-                        </Grid>
-                    </form>
-
+                                <Button onClick={this.handleCloseDialog.bind(this)} color="primary" type="submit">
+                                    Add
+                                </Button>
+                            </DialogActions>
+                        </form>
+                    </Dialog>
                     <p className={classes.error}>{this.state.errorMsg}</p>
-
                     {/*<AddCircle className={classes.addButton} onClick={this.handleAddRow}/>*/}
                 </Paper>
             </Fragment>

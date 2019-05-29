@@ -3,7 +3,7 @@ const styles = theme => ({
         ...theme.mixins.gutters(),
         // paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
-        height: '350px',
+        height: '450px',
         width: '85% ',
         paddingRight: '0px !important',
         paddingLeft: '0px !important'
@@ -43,13 +43,10 @@ const styles = theme => ({
         margin: "5px"
     },
     addDeviceTitle: {
-        fontSize: "18px",
         color: "darkslategray",
         float: "left",
         marginLeft: "20px",
         marginBottom: "0px",
-        fontFamily: "Montserrat"
-
     }
 });
 export default styles;

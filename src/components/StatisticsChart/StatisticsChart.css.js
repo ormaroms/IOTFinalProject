@@ -3,7 +3,7 @@ const styles = theme => ({
         ...theme.mixins.gutters(),
         // paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
-        height: '370px',
+        height: '450px',
         width: '85% ',
         paddingRight: '0px !important',
         paddingLeft: '0px !important'
