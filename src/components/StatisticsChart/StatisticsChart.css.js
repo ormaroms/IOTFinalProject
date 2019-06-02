@@ -26,6 +26,9 @@ const styles = theme => ({
         fontSize: "20px",
         color: "Black",
         fontFamily: "Montserrat"
+    },
+    loader: {
+        marginTop: "100px"
     }
 });
 export default styles;

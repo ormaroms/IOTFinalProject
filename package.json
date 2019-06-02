@@ -12,6 +12,7 @@
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "react-google-charts": "^3.0.13",
+    "react-loader-spinner": "^2.3.0",
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.0",
     "react-scripts": "^3.0.1",
