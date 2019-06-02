@@ -9,21 +9,28 @@ async function getById(id) {
 }
 
 async function create(id ,deviceParam) {
-    if (!await Device.findOne({ userId: id })) {
-        const device = new Device({"userId": id, "devices":[]});
-        device.devices.push(deviceParam);
-        await device.save();
+    let isIdExists = false;
+    let allDevices = await Device.find();
+    allDevices.map((object) => {
+       object.devices.forEach((device) => {
+          if(device.id === deviceParam.id) {
+              isIdExists = true;
+          }
+       });
+    });
+
+    if (isIdExists) {
+        throw new Error('Device Id = ' + deviceParam.id + ' Already exists - please check your device id again');
     } else {
-        let userDevices = await Device.findOne({ userId: id});
-        let device = userDevices.devices.filter(device => device.id === deviceParam.id);
-
-        if (device.length !== 0) {
-            throw new Error('Device Id = ' + device[0].id + ' Already exists');
+        if (!await Device.findOne({userId: id})) {
+            const device = new Device({"userId": id, "devices": []});
+            device.devices.push(deviceParam);
+            await device.save();
         } else {
+            let userDevices = await Device.findOne({userId: id});
             await userDevices.devices.push(deviceParam);
+            await userDevices.save();
         }
-
-        await userDevices.save();
     }
 
     return await Device.findOne({userId: id}, {_id: 0}).then(result => {return result.devices});
