@@ -59,6 +59,9 @@ async function getByUserId(UserId) {
 }
 
 async function update(id, statusParam) {
+    if (Object.keys(statusParam).length === 1)
+        statusParam = (JSON.parse(Object.keys(statusParam)[0]));
+
     let isLightOn = false;
     let isGasOn = false;
 
@@ -83,6 +86,9 @@ async function update(id, statusParam) {
 }
 
 async function create(id, statusParam) {
+    if (Object.keys(statusParam).length === 1)
+        statusParam = (JSON.parse(Object.keys(statusParam)[0]));
+
     let isLightOn = false;
     let isGasOn = false;
 
