@@ -110,10 +110,10 @@ class ArduionsList extends Component {
                             Your Devices
                         </Typography>
                         <div>
-                            <LogoutIcon onClick={this.logout.bind(this)} style={{float: 'right' , fontSize: 35}}/>
-                            <Timelapse onClick={this.routeToStatusHistory} style={{float: 'left', fontSize: 35}}/>
-                            <BarChart onClick={this.routeToStatistics} style={{float: 'left', fontSize: 35}}/>
-                            <AddIcon onClick={() => this.setState({isDialogOpen: true})} style={{float: 'left', fontSize: 35}}/>
+                            <LogoutIcon onClick={this.logout.bind(this)} style={{float: 'right' , fontSize: 35, cursor: 'pointer'}}/>
+                            <Timelapse onClick={this.routeToStatusHistory} style={{float: 'left', fontSize: 35, cursor: 'pointer'}}/>
+                            <BarChart onClick={this.routeToStatistics} style={{float: 'left', fontSize: 35, cursor: 'pointer'}}/>
+                            <AddIcon onClick={() => this.setState({isDialogOpen: true})} style={{float: 'left', fontSize: 35, cursor: 'pointer'}}/>
                         </div>
                     </AppBar>
                     <Table className={classes.table}>
@@ -141,7 +141,7 @@ class ArduionsList extends Component {
                                             <TableCell
                                                 onClick={() => this.handleRouteToStatus(device.id)}>{device.name}</TableCell>
                                             <TableCell><DeleteIcon
-                                                onClick={() => this.handleDeleteRow(device.id)}/></TableCell>
+                                                onClick={() => this.handleDeleteRow(device.id)}  style={{cursor: 'pointer'}}/></TableCell>
                                         </TableRow>
                                     )
                                 })}

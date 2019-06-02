@@ -20,7 +20,15 @@ const styles = theme => ({
     },
     chart: {
         width: "100%",
-        height: "300px"
+        height: "280px"
+    },
+    tabs: {
+        fontSize: "20px",
+        color: "Black",
+        fontFamily: "Montserrat"
+    },
+    loader: {
+        marginTop: "100px"
     }
 });
 export default styles;
