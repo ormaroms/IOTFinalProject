@@ -15,6 +15,7 @@ function jwt() {
             { url: '/register', methods: ['GET'] },
             { url: '/device_list', methods: ['GET'] },
             { url: '/status_history', methods: ['GET'] },
+			{ url: '/statistics_chart', methods: ['GET'] },
 
             '/users/authenticate',
             '/users/register',
