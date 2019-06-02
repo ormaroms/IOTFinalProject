@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import StatisticsChart from '../components/StatisticsChart/StatisticsChart'
 import {StatisticsDataFetched} from '../actions/statisticsChart'
 import {getStatusHistory} from '../serverapi';
-import history from '../history';
+
 
 const mapStateToProps = state => {
     debugger;
@@ -22,7 +22,7 @@ const mapDispatchToProps = dispatch => {
             getStatusHistory(token, id).then(res => {
                 debugger;
                 let chartData = getChartArray(res.data);
-                dispatch(StatisticsDataFetched({chartData: chartData}))
+                dispatch(StatisticsDataFetched( chartData))
             }).catch(err => {
                 console.error("User devices load failed")
                 console.error(err)
@@ -37,7 +37,8 @@ debugger;
     weekStart.setDate(weekStart.getDate() -7)
 
     let daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday','Saturday'];
-    let counter = [0,0,0,0,0,0,0];
+    let lightCounter = [0,0,0,0,0,0,0];
+    let gasCounter = [0,0,0,0,0,0,0];
 
     // Create array of all statuses
     let allStatuses = [];
@@ -51,7 +52,10 @@ debugger;
         // Check if the status is relavant
         if(statusTime > weekStart) {
             if (status.gasStatus){
-                counter[statusTime.getDay()]++;
+                gasCounter[statusTime.getDay()]++;
+            }
+            if (status.lightStatus){
+                lightCounter[statusTime.getDay()]++;
             }
         }
     })
@@ -59,23 +63,29 @@ debugger;
     // Shift days order
     for (let i = 0; i < new Date().getDay() + 1; i++){
         let datTemp = daysInWeek.shift();
-        let countTemp = counter.shift();
+        let lightCountTemp = lightCounter.shift();
+        let gasCountTemp = gasCounter.shift();
         daysInWeek.push(datTemp);
-        counter.push(countTemp)
+        lightCounter.push(lightCountTemp)
+        gasCounter.push(gasCountTemp)
     }
 
 
 
-    let options =  [
+    let gasOption =  [
+        ["Element", "Count", { role: "style" }],
+    ];
+    let lightOption =  [
         ["Element", "Count", { role: "style" }],
     ];
 
     // Create the array for the chart
     for (let i = 0; i < 7; i++) {
-        options.push( [daysInWeek[i], counter[i], "blue"]);
+        gasOption.push( [daysInWeek[i], gasCounter[i], "cornflowerblue"]);
+        lightOption.push( [daysInWeek[i], lightCounter[i], "cornflowerblue"]);
     }
 
-    return options;
+    return {lightOptions: lightOption, gasOptions: gasOption};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StatisticsChart)
