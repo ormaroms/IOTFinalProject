@@ -59,15 +59,27 @@ async function getByUserId(UserId) {
 }
 
 async function update(id, statusParam) {
-    if (Object.keys(statusParam).length === 1)
-        statusParam = (JSON.parse(Object.keys(statusParam)[0]));
+    let isLightOn = false;
+    let isGasOn = false;
 
-    if (await Status.findOne({arduinoId: id})) {
-        await Status.remove({arduinoId: id});
-
+    if (statusParam.gasStatus.toString() === "0") {
+        isGasOn = true;
     }
 
-    this.create(id, statusParam);
+    if (statusParam.lightStatus.toString() === "0") {
+        isLightOn = true;
+    }
+
+    let statusJson = {
+        arduinoId: id,
+        time: Date.now(),
+        lightStatus: isLightOn,
+        gasStatus: isGasOn
+    };
+
+    let newStatus = new Status(statusJson);
+
+    await newStatus.save();
 }
 
 async function create(id, statusParam) {
